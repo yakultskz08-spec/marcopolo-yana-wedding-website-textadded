@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Journey | Marco Polo & Elyannah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      height: 55vh; min-height: 360px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/BLD03307.jpg') center 40% / cover no-repeat;
+      filter: brightness(.38) saturate(.7);
+      transform: scale(1.06);
+    }
+    .page-hero-content { position: relative; z-index: 2; color: #FDFCF6; }
+    .page-hero-content .label { color: rgba(255,255,255,.55); }
+    .page-hero-content .heading { color: #FDFCF6; font-size: clamp(3rem,6vw,5rem); }
+    .page-hero-content .sub {
+      margin-top: .8rem; font-size: .8rem;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+    }
+
+    /* ── INTRO ── */
+    .intro-sec {
+      padding: 4.5rem 6%; text-align: center;
+      background: var(--bg-alt);
+    }
+    .intro-sec p {
+      max-width: 580px; margin: .8rem auto 0;
+      color: var(--text-mid); font-size: 1.05rem; line-height: 1.85;
+    }
+
+    /* ── STAGE PROGRESS NAV ── */
+    .progress-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid #e8e2d0;
+      padding: 0 4%;
+      display: flex; align-items: center; gap: 0;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .progress-nav::-webkit-scrollbar { display: none; }
+    .pn-item {
+      flex-shrink: 0;
+      padding: 1.1rem 1.4rem;
+      font-family: var(--serif); font-size: .72rem;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-soft); cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .25s, border-color .25s;
+      white-space: nowrap;
+      text-decoration: none; display: block;
+    }
+    .pn-item:hover, .pn-item.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── STAGE SECTION ── */
+    .stage {
+      padding: 6rem 0 5rem;
+      border-bottom: 1px solid #e8e2d0;
+    }
+    .stage:nth-child(even) { background: var(--bg-alt); }
+
+    .stage-inner { max-width: 1100px; margin: 0 auto; padding: 0 6%; }
+
+    .stage-header {
+      display: flex; align-items: flex-start;
+      gap: 2rem; margin-bottom: 3.5rem;
+    }
+    .stage-num {
+      font-family: var(--serif); font-size: 4.5rem;
+      color: var(--gold); opacity: .2; line-height: 1;
+      flex-shrink: 0; margin-top: -.4rem;
+      user-select: none;
+    }
+    .stage-tag {
+      display: inline-block;
+      font-family: var(--serif); font-size: .7rem;
+      text-transform: uppercase; letter-spacing: 2.5px;
+      color: var(--gold); border: 1px solid var(--gold);
+      padding: .25rem .8rem; margin-bottom: .7rem;
+    }
+    .stage-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+    }
+
+    .stage-desc {
+      max-width: 640px;
+      color: var(--text-mid); font-size: 1.02rem;
+      line-height: 1.85; margin-bottom: 3rem;
+    }
+
+    /* ── PER-STAGE CAROUSEL ── */
+    .s-carousel { position: relative; }
+    .s-track-wrap { overflow: hidden; }
+    .s-track {
+      display: flex;
+      transition: transform .65s cubic-bezier(.4,0,.2,1);
+    }
+    .s-slide { flex-shrink: 0; padding: 0 .6rem; }
+    .s-slide img, .s-slide .s-ph {
+      width: 100%; display: block; object-fit: cover;
+    }
+    .s-slide img { height: 420px; filter: sepia(6%); transition: filter .4s; }
+    .s-slide img:hover { filter: sepia(0%); }
+
+    .s-ph {
+      height: 420px;
+      background: var(--bg-alt);
+      border: 1px dashed #ccc;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: .6rem; color: var(--text-soft);
+    }
+    .s-ph .ph-icon { font-size: 2rem; opacity: .3; }
+    .s-ph .ph-lbl {
+      font-family: var(--serif); font-size: .7rem;
+      letter-spacing: 2px; text-transform: uppercase; opacity: .4;
+    }
+
+    .s-controls {
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 1.4rem;
+    }
+    .s-btn {
+      width: 42px; height: 42px;
+      background: transparent; border: 1px solid var(--text);
+      cursor: pointer; font-size: 1rem; font-family: var(--body);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, color .2s; flex-shrink: 0;
+    }
+    .s-btn:hover { background: var(--text); color: #fff; }
+    .s-btn:disabled { opacity: .25; cursor: default; }
+    .s-dots { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .s-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #ccc; cursor: pointer; transition: background .2s, transform .2s;
+    }
+    .s-dot.on { background: var(--gold); transform: scale(1.4); }
+    .s-count {
+      margin-left: auto;
+      font-family: var(--serif); font-size: .8rem;
+      color: var(--text-soft); letter-spacing: 1px;
+    }
+
+    /* ── CLOSING ── */
+    .closing-quote {
+      background: var(--bg-dark); color: #FDFCF6;
+      text-align: center; padding: 5.5rem 10%;
+    }
+    .closing-quote blockquote {
+      font-family: var(--script);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--gold); line-height: 1.3;
+    }
+    .closing-quote cite {
+      display: block; margin-top: 1.2rem;
+      font-family: var(--serif); font-size: .75rem;
+      letter-spacing: 3px; color: rgba(255,255,255,.4);
+      font-style: normal; text-transform: uppercase;
+    }
+
+    /* ── BOTTOM NAV ── */
+    .page-nav-bar {
+      background: var(--bg-alt); padding: 2rem 7%;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid #e8e2d0;
+    }
+    .page-nav-bar a {
+      font-size: .8rem; text-transform: uppercase; letter-spacing: 2px;
+      text-decoration: none; color: var(--text-mid); transition: color .2s;
+    }
+    .page-nav-bar a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .stage-header { gap: 1rem; }
+      .stage-num { font-size: 3rem; }
+      .s-slide img, .s-ph { height: 260px; }
+      .pn-item { padding: .9rem 1rem; font-size: .65rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="cur-dot"></div>
+  <div class="cur-glow"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">M & E</a>
+    <ul class="nav-links">
+      <li><a href="story.html">Story</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="journey.html" class="active">Journey</a></li>
+      <li><a href="index.html#rsvp">RSVP</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-content">
+      <span class="label">From the very beginning</span>
+      <h1 class="heading">Our Journey</h1>
+      <p class="sub">subtitle</p>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro-sec">
+    <div class="reveal">
+      <span class="label">How we got here</span>
+      <h2 class="heading">The Chapters of Us</h2>
+      <p>subtitle</p>
+    </div>
+  </div>
+
+  <!-- Sticky nav -->
+  <div class="progress-nav" id="progressNav">
+    <a class="pn-item" href="#stage-dates">Dates</a>
+    <a class="pn-item" href="#stage-gtky">GTKY</a>
+    <a class="pn-item" href="#stage-ligaw">Ligaw</a>
+    <a class="pn-item" href="#stage-family">Family</a>
+    <a class="pn-item" href="#stage-pamamanhikan">Pamamanhikan</a>
+    <a class="pn-item" href="#stage-proposal">Proposal</a>
+    <a class="pn-item" href="#stage-sfc">SFC</a>
+  </div>
+
+  <!-- ░░ STAGE 1 — DATES ░░ -->
+  <section class="stage" id="stage-dates">
+    <div class="stage-inner">
+      <div class="stage-header reveal">
+        <span class="stage-num">01</span>
+        <div>
+          <span class="stage-tag">Chapter One</span>
+          <h2 class="stage-title">Dates</h2>
+        </div>
+      </div>
+      <p class="stage-desc reveal">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+      </p>
+      <div class="s-carousel reveal">
+        <div class="s-track-wrap"><div class="s-track">
+          <div class="s-slide"><img src="images/DSC03863.JPG" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/DSC09343.JPG" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/IMG_4142.jpg" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/Dates/20230513_142739.jpg" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/Dates/DSC03863.JPG" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/Dates/DSC04360.JPG" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/Dates/IMG-1c13bda709c95340c2c98e6129441004-V.jpg" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20230720_002632_136.jpg" alt="GTKY"></div>
+        </div></div>
+        <div class="s-controls">
+          <button class="s-btn prev">←</button>
+          <div class="s-dots"></div>
+          <button class="s-btn next">→</button>
+          <span class="s-count"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ STAGE 2 — GTKY ░░ -->
+  <section class="stage" id="stage-gtky">
+    <div class="stage-inner">
+      <div class="stage-header reveal">
+        <span class="stage-num">02</span>
+        <div>
+          <span class="stage-tag">Chapter Two</span>
+          <h2 class="stage-title">Getting to Know You</h2>
+        </div>
+      </div>
+      <p class="stage-desc reveal">
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.
+      </p>
+      <div class="s-carousel reveal">
+        <div class="s-track-wrap"><div class="s-track">
+          <div class="s-slide"><img src="images/BLD03307.jpg" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/BLD03128.jpg" alt="GTKY"></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">GTKY · Photo 3</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">GTKY · Photo 4</span></div></div>
+        </div></div>
+        <div class="s-controls">
+          <button class="s-btn prev">←</button>
+          <div class="s-dots"></div>
+          <button class="s-btn next">→</button>
+          <span class="s-count"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ STAGE 3 — LIGAW ░░ -->
+  <section class="stage" id="stage-ligaw">
+    <div class="stage-inner">
+      <div class="stage-header reveal">
+        <span class="stage-num">03</span>
+        <div>
+          <span class="stage-tag">Chapter Three</span>
+          <h2 class="stage-title">Ligaw</h2>
+        </div>
+      </div>
+      <p class="stage-desc reveal">
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+      </p>
+      <div class="s-carousel reveal">
+        <div class="s-track-wrap"><div class="s-track">
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Ligaw · Photo 1</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Ligaw · Photo 2</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Ligaw · Photo 3</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Ligaw · Photo 4</span></div></div>
+        </div></div>
+        <div class="s-controls">
+          <button class="s-btn prev">←</button>
+          <div class="s-dots"></div>
+          <button class="s-btn next">→</button>
+          <span class="s-count"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ STAGE 4 — FAMILY ░░ -->
+  <section class="stage" id="stage-family">
+    <div class="stage-inner">
+      <div class="stage-header reveal">
+        <span class="stage-num">04</span>
+        <div>
+          <span class="stage-tag">Chapter Four</span>
+          <h2 class="stage-title">Family</h2>
+        </div>
+      </div>
+      <p class="stage-desc reveal">
+        Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet.
+      </p>
+      <div class="s-carousel reveal">
+        <div class="s-track-wrap"><div class="s-track">
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Family · Photo 1</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Family · Photo 2</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Family · Photo 3</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Family · Photo 4</span></div></div>
+        </div></div>
+        <div class="s-controls">
+          <button class="s-btn prev">←</button>
+          <div class="s-dots"></div>
+          <button class="s-btn next">→</button>
+          <span class="s-count"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ STAGE 5 — PAMAMANHIKAN ░░ -->
+  <section class="stage" id="stage-pamamanhikan">
+    <div class="stage-inner">
+      <div class="stage-header reveal">
+        <span class="stage-num">05</span>
+        <div>
+          <span class="stage-tag">Chapter Five</span>
+          <h2 class="stage-title">Pamamanhikan Weekend</h2>
+        </div>
+      </div>
+      <p class="stage-desc reveal">
+        Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+      </p>
+      <div class="s-carousel reveal">
+        <div class="s-track-wrap"><div class="s-track">
+          <div class="s-slide"><img src="images/BLD03128.jpg" alt="Pamamanhikan"></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Pamamanhikan · Photo 2</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Pamamanhikan · Photo 3</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Pamamanhikan · Photo 4</span></div></div>
+        </div></div>
+        <div class="s-controls">
+          <button class="s-btn prev">←</button>
+          <div class="s-dots"></div>
+          <button class="s-btn next">→</button>
+          <span class="s-count"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ STAGE 6 — PROPOSAL ░░ -->
+  <section class="stage" id="stage-proposal">
+    <div class="stage-inner">
+      <div class="stage-header reveal">
+        <span class="stage-num">06</span>
+        <div>
+          <span class="stage-tag">Chapter Six</span>
+          <h2 class="stage-title">The Proposal</h2>
+        </div>
+      </div>
+      <p class="stage-desc reveal">
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.
+      </p>
+      <div class="s-carousel reveal">
+        <div class="s-track-wrap"><div class="s-track">
+          <div class="s-slide"><img src="images/BLD03307.jpg" alt="Proposal" style="object-position:center 20%;"></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Proposal · Photo 2</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Proposal · Photo 3</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Proposal · Photo 4</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">Proposal · Photo 5</span></div></div>
+        </div></div>
+        <div class="s-controls">
+          <button class="s-btn prev">←</button>
+          <div class="s-dots"></div>
+          <button class="s-btn next">→</button>
+          <span class="s-count"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ STAGE 7 — SFC ░░ -->
+  <section class="stage" id="stage-sfc">
+    <div class="stage-inner">
+      <div class="stage-header reveal">
+        <span class="stage-num">07</span>
+        <div>
+          <span class="stage-tag">Chapter Seven</span>
+          <h2 class="stage-title">SFC</h2>
+        </div>
+      </div>
+      <p class="stage-desc reveal">
+        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.
+      </p>
+      <div class="s-carousel reveal">
+        <div class="s-track-wrap"><div class="s-track">
+          <div class="s-slide"><img src="images/BLD03128.jpg" alt="SFC" style="object-position:center 40%;"></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">SFC · Photo 2</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">SFC · Photo 3</span></div></div>
+          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">SFC · Photo 4</span></div></div>
+        </div></div>
+        <div class="s-controls">
+          <button class="s-btn prev">←</button>
+          <div class="s-dots"></div>
+          <button class="s-btn next">→</button>
+          <span class="s-count"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <div class="closing-quote">
+    <blockquote>quotes if want niyo po</blockquote>
+    <cite>— uhm some famous person</cite>
+  </div>
+
+  <div class="page-nav-bar">
+    <a href="gallery.html">← Gallery</a>
+    <a href="index.html#rsvp">RSVP Now →</a>
+  </div>
+
+  <footer>
+    <p>With love and gratitude,</p>
+    <p class="foot-script">Marco Polo &amp; Elyannah</p>
+    <p style="margin-top:1.5rem; font-size:.75rem; color:#888; letter-spacing:2px;">MAY 11, 2026 · VIRAC, CATANDUANES</p>
+  </footer>
+
+  <script>
+    /* ── Cursor ── */
+    const dot  = document.querySelector('.cur-dot');
+    const glow = document.querySelector('.cur-glow');
+    document.addEventListener('mousemove', e => {
+      dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+      setTimeout(() => { glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, 55);
+    });
+
+    /* ── Scroll reveal ── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── Sticky nav active state ── */
+    const stageEls  = document.querySelectorAll('.stage');
+    const navAnchors= document.querySelectorAll('.pn-item');
+    const stageObs  = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting) {
+          navAnchors.forEach(n => n.classList.remove('active'));
+          const match = document.querySelector(`.pn-item[href="#${e.target.id}"]`);
+          if(match) {
+            match.classList.add('active');
+            match.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+      });
+    }, { threshold: 0.35 });
+    stageEls.forEach(s => stageObs.observe(s));
+
+    /* ── Per-stage carousel factory ── */
+    document.querySelectorAll('.s-carousel').forEach(car => {
+      const track   = car.querySelector('.s-track');
+      const slides  = Array.from(car.querySelectorAll('.s-slide'));
+      const dotsWrap= car.querySelector('.s-dots');
+      const countEl = car.querySelector('.s-count');
+      const prevBtn = car.querySelector('.prev');
+      const nextBtn = car.querySelector('.next');
+      const total   = slides.length;
+      let cur = 0;
+
+      function vis() {
+        return window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
+      }
+      function maxCur() { return Math.max(0, total - vis()); }
+
+      function setWidths() {
+        slides.forEach(s => s.style.width = `${100 / vis()}%`);
+      }
+
+      function buildDots() {
+        dotsWrap.innerHTML = '';
+        const pages = Math.ceil(total / vis());
+        for(let i = 0; i < pages; i++) {
+          const d = document.createElement('div');
+          d.className = 's-dot';
+          d.addEventListener('click', () => go(i * vis()));
+          dotsWrap.appendChild(d);
+        }
+      }
+
+      function render() {
+        cur = Math.min(cur, maxCur());
+        const v = vis();
+        // translate: each slide is 100/v %, so shift by cur slides
+        track.style.transform = `translateX(-${cur * (100 / v)}%)`;
+        // dots
+        const page = Math.floor(cur / v);
+        dotsWrap.querySelectorAll('.s-dot').forEach((d,i) => d.classList.toggle('on', i === page));
+        countEl.textContent = `${page + 1} / ${Math.ceil(total / v)}`;
+        prevBtn.disabled = cur === 0;
+        nextBtn.disabled = cur >= maxCur();
+      }
+
+      function go(idx) { cur = Math.max(0, Math.min(idx, maxCur())); render(); }
+
+      prevBtn.addEventListener('click', () => go(cur - vis()));
+      nextBtn.addEventListener('click', () => go(cur + vis()));
+
+      /* touch swipe */
+      let touchX = 0;
+      track.addEventListener('touchstart', e => touchX = e.touches[0].clientX, { passive:true });
+      track.addEventListener('touchend',   e => {
+        const dx = e.changedTouches[0].clientX - touchX;
+        if(Math.abs(dx) > 40) dx < 0 ? go(cur + vis()) : go(cur - vis());
+      }, { passive:true });
+
+      setWidths(); buildDots(); render();
+      window.addEventListener('resize', () => { setWidths(); buildDots(); render(); });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story | Marco Polo & Elyannah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      height: 55vh; min-height:380px;
+      display:flex; align-items:center; justify-content:center;
+      text-align:center; position:relative; overflow:hidden;
+      background: var(--bg-alt);
+    }
+    .page-hero-bg {
+      position:absolute; inset:0;
+      background: url('images/BLD03307.jpg') center 30%/cover no-repeat;
+      filter: brightness(.45) saturate(.8);
+      transform: scale(1.05);
+    }
+    .page-hero-content { position:relative; z-index:2; color:#FDFCF6; }
+    .page-hero-content .label { color:rgba(255,255,255,.6); }
+    .page-hero-content .heading { color:#FDFCF6; font-size:clamp(3rem,6vw,5rem); }
+    .page-hero-content .sub {
+      margin-top:1rem; font-size:.85rem; letter-spacing:3px;
+      text-transform:uppercase; color:rgba(255,255,255,.5);
+    }
+
+    /* ── STORY BLOCKS ── */
+    .story-sec { padding:6rem 7%; }
+
+    .chapter {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:5rem; align-items:center;
+      margin-bottom: 7rem;
+    }
+    .chapter:nth-child(even) { direction:rtl; }
+    .chapter:nth-child(even) > * { direction:ltr; }
+
+    .ch-img-wrap {
+      overflow:hidden; position:relative;
+    }
+    .ch-img-wrap img {
+      width:100%; height:520px;
+      object-fit:cover; display:block;
+      transition: transform .6s ease;
+    }
+    .ch-img-wrap:hover img { transform: scale(1.04); }
+
+    /* thin gold accent line on left */
+    .ch-img-wrap::before {
+      content:'';
+      position:absolute; top:1.5rem; left:-1.5rem;
+      width:3px; height:60%;
+      background: var(--gold); z-index:1;
+    }
+    .chapter:nth-child(even) .ch-img-wrap::before {
+      left:auto; right:-1.5rem;
+    }
+
+    .ch-text { padding: 1rem 0; }
+    .ch-num {
+      font-family:var(--serif); font-size:5rem;
+      color:var(--gold); opacity:.18;
+      line-height:1; margin-bottom:-.5rem;
+      display:block;
+    }
+    .ch-title {
+      font-family:var(--serif);
+      font-size:clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom:1.5rem; line-height:1.1;
+    }
+    .ch-text p {
+      font-size:1.05rem; line-height:1.9;
+      color:var(--text-mid); margin-bottom:1rem;
+    }
+
+    /* ── QUOTE DIVIDER ── */
+    .quote-bar {
+      background: var(--bg-dark); color:#FDFCF6;
+      text-align:center; padding:5rem 10%;
+      margin-bottom:7rem;
+    }
+    .quote-bar blockquote {
+      font-family:var(--script); font-size:clamp(2rem,3.5vw,3rem);
+      line-height:1.3; color:var(--gold);
+    }
+    .quote-bar cite {
+      display:block; margin-top:1.2rem;
+      font-family:var(--serif); font-size:.8rem;
+      letter-spacing:3px; color:rgba(255,255,255,.5);
+      font-style:normal; text-transform:uppercase;
+    }
+
+    /* ── BACK/NAV ── */
+    .page-nav-bar {
+      background: var(--bg-alt); padding:2rem 7%;
+      display:flex; justify-content:space-between; align-items:center;
+      border-top:1px solid #e8e2d0;
+    }
+    .page-nav-bar a { font-size:.8rem; text-transform:uppercase; letter-spacing:2px; text-decoration:none; color:var(--text-mid); transition:color .2s; }
+    .page-nav-bar a:hover { color:var(--gold); }
+
+    @media (max-width:768px) {
+      .chapter { grid-template-columns:1fr; gap:2rem; margin-bottom:4rem; }
+      .chapter:nth-child(even) { direction:ltr; }
+      .ch-img-wrap img { height:300px; }
+      .ch-img-wrap::before { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="cur-dot"></div>
+  <div class="cur-glow"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">M & E</a>
+    <ul class="nav-links">
+      <li><a href="story.html" class="active">Story</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="index.html#rsvp">RSVP</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-content">
+      <span class="label">How it all began</span>
+      <h1 class="heading">Our Story</h1>
+      <p class="sub">Marco Polo &amp; Elyannah</p>
+    </div>
+  </div>
+
+  <!-- Story Chapters -->
+  <section class="story-sec">
+
+    <div class="chapter reveal">
+      <div class="ch-img-wrap">
+        <img src="images/BLD03307.jpg" alt="The beginning">
+      </div>
+      <div class="ch-text">
+        <span class="ch-num">01</span>
+        <h2 class="ch-title">TITLE</h2>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+       
+      </div>
+    </div>
+
+    <div class="quote-bar reveal">
+      <blockquote>"Quotes."</blockquote>
+      <cite>— uhm some famous person</cite>
+    </div>
+
+    <div class="chapter reveal">
+      <div class="ch-img-wrap">
+        <img src="images/BLD03128.jpg" alt="Growing together">
+      </div>
+      <div class="ch-text">
+        <span class="ch-num">02</span>
+        <h2 class="ch-title">TITLE</h2>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+      </div>
+    </div>
+
+    <div class="chapter reveal">
+      <div class="ch-img-wrap">
+        <img src="images/BLD03307.jpg" alt="The proposal" style="object-position: center 15%;">
+      </div>
+      <div class="ch-text">
+        <span class="ch-num">03</span>
+        <h2 class="ch-title">TITLE</h2>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+      </div>
+    </div>
+
+    <div class="chapter reveal">
+      <div class="ch-img-wrap">
+        <img src="images/BLD03128.jpg" alt="Forever begins" style="object-position:center 40%;">
+      </div>
+      <div class="ch-text">
+        <span class="ch-num">04</span>
+        <h2 class="ch-title">TITLE</h2>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Bottom nav -->
+  <div class="page-nav-bar">
+    <a href="index.html">← Back to Home</a>
+    <a href="gallery.html">Gallery →</a>
+  </div>
+
+  <footer>
+    <p>With love and gratitude,</p>
+    <p class="foot-script">Marco Polo &amp; Elyannah</p>
+    <p style="margin-top:1.5rem; font-size:.75rem; color:#888; letter-spacing:2px;">MAY 11, 2026 · VIRAC, CATANDUANES</p>
+  </footer>
+
+  <script>
+    const dot  = document.querySelector('.cur-dot');
+    const glow = document.querySelector('.cur-glow');
+    document.addEventListener('mousemove', e => {
+      dot.style.left  = e.clientX + 'px';
+      dot.style.top   = e.clientY + 'px';
+      setTimeout(()=>{ glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, 55);
+    });
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('in');
+      });
+    });
+    document.querySelectorAll('.reveal').forEach(el => {
+      if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('in');
+    });
+  </script>
+</body>
+</html>

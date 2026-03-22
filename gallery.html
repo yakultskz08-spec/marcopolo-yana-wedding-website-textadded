@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Marco Polo & Elyannah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      height: 50vh; min-height:320px;
+      display:flex; align-items:center; justify-content:center;
+      text-align:center; position:relative; overflow:hidden;
+    }
+    .page-hero-bg {
+      position:absolute; inset:0;
+      background: url('images/BLD03128.jpg') center 35%/cover no-repeat;
+      filter: brightness(.4) saturate(.7);
+      transform: scale(1.05);
+    }
+    .page-hero-content { position:relative; z-index:2; color:#FDFCF6; }
+    .page-hero-content .label { color:rgba(255,255,255,.6); }
+    .page-hero-content .heading { color:#FDFCF6; font-size:clamp(3rem,6vw,5rem); }
+    .page-hero-content .sub { margin-top:.8rem; font-size:.8rem; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.45); }
+
+    /* ── CAROUSEL ── */
+    .carousel-sec {
+      padding: 6rem 0 4rem;
+      background: var(--bg-alt);
+    }
+    .carousel-title { text-align:center; margin-bottom:3rem; }
+
+    .carousel-stage {
+      position:relative; height:520px;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden; perspective:1000px;
+    }
+    .c-card {
+      position:absolute;
+      width: min(360px, 75vw);
+      height: min(480px, 56vh);
+      overflow:hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,.18);
+      transition: transform .7s cubic-bezier(.34,1.56,.64,1), opacity .7s ease;
+    }
+    .c-card img { width:100%; height:100%; object-fit:cover; filter:sepia(8%); display:block; }
+    .c-card.center { z-index:3; transform:translateX(0) scale(1.08); opacity:1; }
+    .c-card.left   { z-index:2; transform:translateX(-340px) scale(.82); opacity:.55; filter:blur(.8px); }
+    .c-card.right  { z-index:2; transform:translateX(340px) scale(.82); opacity:.55; filter:blur(.8px); }
+    .c-card.hidden { opacity:0; transform:scale(.4); z-index:1; }
+
+    .carousel-ctrls {
+      display:flex; justify-content:center; align-items:center;
+      gap:2rem; margin-top:3rem;
+    }
+    .c-btn {
+      background:transparent; border:1px solid var(--text);
+      padding:.8rem 2rem; cursor:pointer;
+      font-size:.75rem; text-transform:uppercase; letter-spacing:2px;
+      transition: background .25s, color .25s; font-family:var(--body);
+    }
+    .c-btn:hover { background:var(--text); color:#fff; }
+
+    .c-counter { font-family:var(--serif); font-size:.9rem; color:var(--text-soft); letter-spacing:2px; }
+
+    /* ── MASONRY GRID ── */
+    .grid-sec { padding:5rem 6% 7rem; }
+    .grid-title { text-align:center; margin-bottom:3rem; }
+
+    .photo-grid {
+      columns: 3 250px;
+      column-gap:1.2rem;
+    }
+    .photo-grid-item {
+      break-inside:avoid;
+      margin-bottom:1.2rem;
+      overflow:hidden; position:relative;
+      cursor:pointer;
+    }
+    .photo-grid-item img {
+      width:100%; display:block;
+      transition: transform .5s ease, filter .5s ease;
+      filter: sepia(5%);
+    }
+    .photo-grid-item:hover img { transform:scale(1.04); filter:sepia(0%); }
+
+    /* placeholder grid items */
+    .ph {
+      background:var(--bg-alt);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--text-soft); font-family:var(--serif); font-size:.8rem;
+      letter-spacing:2px; text-transform:uppercase;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display:none; position:fixed; inset:0;
+      background:rgba(10,10,10,.92); z-index:9000;
+      align-items:center; justify-content:center;
+    }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:88vw; max-height:88vh; object-fit:contain; box-shadow:0 0 60px rgba(0,0,0,.5); }
+    .lb-close {
+      position:absolute; top:2rem; right:2.5rem;
+      font-size:2rem; color:#fff; cursor:pointer; background:none; border:none;
+      line-height:1; opacity:.7; transition:opacity .2s;
+    }
+    .lb-close:hover { opacity:1; }
+
+    /* ── BOTTOM NAV ── */
+    .page-nav-bar {
+      background: var(--bg-alt); padding:2rem 7%;
+      display:flex; justify-content:space-between; align-items:center;
+      border-top:1px solid #e8e2d0;
+    }
+    .page-nav-bar a { font-size:.8rem; text-transform:uppercase; letter-spacing:2px; text-decoration:none; color:var(--text-mid); transition:color .2s; }
+    .page-nav-bar a:hover { color:var(--gold); }
+
+    @media (max-width:768px) {
+      .c-card.left  { transform:translateX(-140px) scale(.72); }
+      .c-card.right { transform:translateX(140px) scale(.72); }
+      .photo-grid   { columns:2 140px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="cur-dot"></div>
+  <div class="cur-glow"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">M & E</a>
+    <ul class="nav-links">
+      <li><a href="story.html">Story</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="index.html#rsvp">RSVP</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-content">
+      <span class="label">Captured moments</span>
+      <h1 class="heading">Gallery</h1>
+      <p class="sub">Pre-nuptial photos &amp; memories</p>
+    </div>
+  </div>
+
+  <!-- Carousel -->
+  <section class="carousel-sec">
+    <div class="carousel-title reveal">
+      <span class="label">Swipe through</span>
+      <h2 class="heading">Our Favorites</h2>
+    </div>
+    <div class="carousel-stage" id="stage">
+      <div class="c-card center"><img src="images/BLD03307.jpg" alt=""></div>
+      <div class="c-card right"><img src="images/BLD03323.jpg" alt=""></div>
+      <div class="c-card hidden"><img src="images/BLD03325.jpg" alt="" style="object-position:center 15%;"></div>
+      <div class="c-card hidden"><img src="images/BLD03381.jpg" alt="" style="object-position:center 50%;"></div>
+    </div>
+    <div class="carousel-ctrls">
+      <button class="c-btn" id="prevBtn">← Prev</button>
+      <span class="c-counter" id="counter">1 / 4</span>
+      <button class="c-btn" id="nextBtn">Next →</button>
+    </div>
+  </section>
+
+  <!-- Masonry Grid -->
+  <section class="grid-sec">
+    <div class="grid-title reveal">
+      <span class="label">All together</span>
+      <h2 class="heading">The Full Album</h2>
+      <p style="margin-top:1rem; color:var(--text-soft); font-size:.9rem;">More photos from the couple will be added here.</p>
+    </div>
+    <div class="photo-grid">
+      <div class="photo-grid-item"><img src="images/BLD03039.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/BLD03031.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/BLD03128.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/BLD03170.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/BLD03183.jpg" alt="" style="object-position:center 20%;" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/BLD03254.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/BLD03255.jpg" alt="" style="object-position:center 40%;" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/BLD03307.jpg" alt="" onclick="openLightbox(this)"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <img id="lbImg" src="" alt="">
+  </div>
+
+  <div class="page-nav-bar">
+    <a href="story.html">← Our Story</a>
+    <a href="journey.html">Wedding Journey →</a>
+  </div>
+
+  <footer>
+    <p>With love and gratitude,</p>
+    <p class="foot-script">Marco Polo &amp; Elyannah</p>
+    <p style="margin-top:1.5rem; font-size:.75rem; color:#888; letter-spacing:2px;">MAY 11, 2026 · VIRAC, CATANDUANES</p>
+  </footer>
+
+  <script>
+    // Cursor
+    const dot  = document.querySelector('.cur-dot');
+    const glow = document.querySelector('.cur-glow');
+    document.addEventListener('mousemove', e => {
+      dot.style.left  = e.clientX + 'px'; dot.style.top   = e.clientY + 'px';
+      setTimeout(()=>{ glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, 55);
+    });
+    // Reveal
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('in');
+      });
+    });
+    document.querySelectorAll('.reveal').forEach(el => {
+      if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('in');
+    });
+
+    // Carousel
+    let idx = 0;
+    const cards = Array.from(document.querySelectorAll('.c-card'));
+    const total = cards.length;
+    function refreshCarousel() {
+      cards.forEach(c => c.classList.remove('center','left','right','hidden'));
+      cards[idx].classList.add('center');
+      cards[(idx+1)%total].classList.add('right');
+      cards[(idx-1+total)%total].classList.add('left');
+      cards.forEach((c,i) => { if(!c.classList.length) c.classList.add('hidden'); });
+      document.getElementById('counter').textContent = `${idx+1} / ${total}`;
+    }
+    refreshCarousel();
+    document.getElementById('nextBtn').onclick = () => { idx=(idx+1)%total; refreshCarousel(); };
+    document.getElementById('prevBtn').onclick = () => { idx=(idx-1+total)%total; refreshCarousel(); };
+
+    // Lightbox
+    function openLightbox(img) {
+      document.getElementById('lbImg').src = img.src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+  </script>
+</body>
+</html>
