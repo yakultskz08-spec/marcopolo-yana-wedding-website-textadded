@@ -118,10 +118,41 @@
     .page-nav-bar a { font-size:.8rem; text-transform:uppercase; letter-spacing:2px; text-decoration:none; color:var(--text-mid); transition:color .2s; }
     .page-nav-bar a:hover { color:var(--gold); }
 
-    @media (max-width:768px) {
-      .c-card.left  { transform:translateX(-140px) scale(.72); }
-      .c-card.right { transform:translateX(140px) scale(.72); }
-      .photo-grid   { columns:2 140px; }
+ 
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+
+      .carousel-stage {
+        height: 340px;
+      }
+ 
+
+      .c-card {
+        width: 58vw;
+        height: 42vw;
+        max-width: 260px;
+        max-height: 190px;
+      }
+ 
+ 
+      .c-card.left  { transform: translateX(-120px) scale(.82); }
+      .c-card.right { transform: translateX(120px) scale(.82); }
+ 
+      .photo-grid { columns: 2 140px; }
+    }
+ 
+    @media (max-width: 480px) {
+      .carousel-stage { height: 300px; }
+ 
+      .c-card {
+        width: 62vw;
+        height: 54vw;
+        max-width: 230px;
+        max-height: 255px;
+      }
+ 
+      .c-card.left  { transform: translateX(-100px) scale(.82); }
+      .c-card.right { transform: translateX(100px) scale(.82); }
     }
   </style>
 </head>
@@ -160,22 +191,22 @@
     </div>
     <div class="carousel-stage" id="stage">
       <div class="c-card center"><img src="images/BLD03381.jpg" alt=""></div>
-      <div class="c-card right"><img src="images/Gallery/182cf24f-be1d-4637-8107-721c98a10568.jpg" alt="" style="object-position:center 15%;"></div>
+      <div class="c-card right"><img src="images/Gallery/182cf24f-be1d-4637-8107-721c98a10568.jpg" alt="" style="object-position:60% 15%;"></div>
       <div class="c-card right"><img src="images/Gallery/1f0d97ce-c6a3-4a26-9325-6a24cc4653c8.jpg" alt="" style="object-position:center 15%;"></div>
       <div class="c-card right"><img src="images/Gallery/242c7c17-4e48-43e9-8e5d-51dd548e4960.jpg" alt="" style="object-position:center 15%;"></div>
       <div class="c-card right"><img src="images/Gallery/2a7c0dae-9bf5-4d1d-b2c1-27d968e81bce.jpg" alt="" style="object-position:center 15%;"></div>
       <div class="c-card right"><img src="images/Gallery/2fcf17f6-4a32-41a0-97a1-ddb8534a0b3b.jpg" alt="" style="object-position:center 15%;"></div>
       <div class="c-card right"><img src="images/Gallery/39ec2797-c533-49a5-8e54-42c0b91f830e.jpg" alt="" style="object-position:center 15%;"></div>
       <div class="c-card right"><img src="images/Gallery/3d09f48f-8a90-4952-ad7a-d9cc099913fc.jpg" alt="" style="object-position:center 15%;"></div>
-      <div class="c-card right"><img src="images/Gallery/469320d5-7793-499e-b927-77a2a9e4d5e6.jpg" alt="" style="object-position:center 15%;"></div>
-      <div class="c-card right"><img src="images/Gallery/49b13b3a-4dd9-4826-99e7-84fbffd700f9.jpg" alt="" style="object-position:center 15%;"></div>
-      <div class="c-card right"><img src="images/Gallery/5ffc68bf-ced5-498b-b8f6-e66ce175b7bb.jpg" alt="" style="object-position:center 15%;"></div>
-      <div class="c-card right"><img src="images/Gallery/60dcc9b5-0606-4403-9586-74eb477fbf8f.jpg" alt="" style="object-position:center 15%;"></div>
-      <div class="c-card right"><img src="images/Gallery/6b89829d-a49f-43f8-ae7e-4112fadf30c2.jpg" alt="" style="object-position:center 15%;"></div>
+      <div class="c-card right"><img src="images/Gallery/469320d5-7793-499e-b927-77a2a9e4d5e6.jpg" alt="" style="object-position:center 45%;"></div>
+      <div class="c-card right"><img src="images/Gallery/49b13b3a-4dd9-4826-99e7-84fbffd700f9.jpg" alt="" style="object-position:center 60%;"></div>
+      <div class="c-card right"><img src="images/Gallery/5ffc68bf-ced5-498b-b8f6-e66ce175b7bb.jpg" alt="" style="object-position: 65% 15%;"></div>
+      <div class="c-card right"><img src="images/Gallery/60dcc9b5-0606-4403-9586-74eb477fbf8f.jpg" alt="" style="object-position:20% 80%;"></div>
+      <div class="c-card right"><img src="images/Gallery/6b89829d-a49f-43f8-ae7e-4112fadf30c2.jpg" alt="" style="object-position: 55% center;"></div>
       <div class="c-card right"><img src="images/Gallery/ad8d33e6-3305-4a92-8ba1-30353731df6c.jpg" alt="" style="object-position:center 15%;"></div>
-      <div class="c-card hidden"><img src="images/Gallery/c8a5ea6f-fecf-464f-99cc-85d423422cc3.jpg" alt="" style="object-position:center 15%;"></div>
-      <div class="c-card hidden"><img src="images/Gallery/dfc19b3c-81c8-4deb-8e4c-dbd0f4c618fe.jpg" alt="" style="object-position:center 15%;"></div>
-      <div class="c-card hidden"><img src="images/Gallery/e4ec7308-64f9-4aa0-baf1-94b489032bf9.jpg" alt="" style="object-position:center 15%;"></div>
+      <div class="c-card hidden"><img src="images/Gallery/c8a5ea6f-fecf-464f-99cc-85d423422cc3.jpg" alt="" style="object-position:center 65%;"></div>
+      <div class="c-card hidden"><img src="images/Gallery/dfc19b3c-81c8-4deb-8e4c-dbd0f4c618fe.jpg" alt="" style="object-position:center 65%;"></div>
+      <div class="c-card hidden"><img src="images/Gallery/e4ec7308-64f9-4aa0-baf1-94b489032bf9.jpg" alt="" style="object-position: 55% 15%;"></div>
     </div>
     <div class="carousel-ctrls">
       <button class="c-btn" id="prevBtn">← Prev</button>
@@ -199,7 +230,10 @@
       <div class="photo-grid-item"><img src="images/BLD03183.jpg" alt="" style="object-position:center 20%;" onclick="openLightbox(this)"></div>
       <div class="photo-grid-item"><img src="images/BLD03254.jpg" alt="" onclick="openLightbox(this)"></div>
       <div class="photo-grid-item"><img src="images/BLD03255.jpg" alt="" style="object-position:center 40%;" onclick="openLightbox(this)"></div>
-      <div class="photo-grid-item"><img src="images/BLD03307.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/253e6e1d-7f94-4d78-880b-0b524e453534.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/b2362089-7931-47d3-8bbb-2d72e4247881.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/94e4cf56-65a9-40ca-a298-df3d60ca68bf.jpg" alt="" onclick="openLightbox(this)"></div>
+      <div class="photo-grid-item"><img src="images/66368add-9d3e-464a-989f-4189205fac12.jpg" alt="" onclick="openLightbox(this)"></div>
     </div>
   </section>
 
