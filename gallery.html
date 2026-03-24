@@ -249,7 +249,11 @@
       cards[idx].classList.add('center');
       cards[(idx+1)%total].classList.add('right');
       cards[(idx-1+total)%total].classList.add('left');
-      cards.forEach((c,i) => { if(!c.classList.length) c.classList.add('hidden'); });
+      cards.forEach(c => {
+        if(!c.classList.contains('center') && !c.classList.contains('left') && !c.classList.contains('right')) {
+    c.classList.add('hidden');
+  }
+});
       document.getElementById('counter').textContent = `${idx+1} / ${total}`;
     }
     refreshCarousel();
