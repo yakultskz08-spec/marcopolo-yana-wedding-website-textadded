@@ -51,7 +51,6 @@
       transition: transform .1s linear;
     }
 
-
     .sun-seal {
       position: absolute;
       top: 50%; left: 50%;
@@ -240,7 +239,6 @@
       <img src="images/BLD03307.jpg" alt="Marco Polo and Elyannah">
     </div>
 
-
     <div class="sun-seal">
       <svg viewBox="0 0 100 100" width="130" height="130">
         <path id="cp" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" fill="transparent"/>
@@ -254,7 +252,7 @@
     </div>
   </section>
 
-
+  <!-- MESSAGE -->
   <section class="message-sec sec reveal" id="story">
     <div class="message-grid">
       <div class="message-img-wrap reveal">
@@ -321,7 +319,6 @@
       <h2 class="heading">We've Got Answers</h2>
     </div>
     <div class="faq-wrap">
-
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           What should I wear?<span class="faq-icon">+</span>
@@ -330,7 +327,6 @@
           <p>Come dressed in your favorite shade of gold, yellow, or champagne and celebrate with us in warmth and joy! Your presence already brightens our day — but a touch of sunlight will make it even more special. Gents, tan suits are perfect.</p>
         </div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           Are gifts required?<span class="faq-icon">+</span>
@@ -339,7 +335,6 @@
           <p>Your presence is the greatest gift we could ask for. However, if you wish to bless us further, a simple monetary gift would be deeply appreciated as we begin our new life together.</p>
         </div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           Can I bring a plus one?<span class="faq-icon">+</span>
@@ -348,25 +343,22 @@
           <p>Due to limited seating, we kindly ask that only guests listed on the invitation attend. Thank you so much for your understanding!</p>
         </div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Question?<span class="faq-icon">+</span>
+          Is there parking available?<span class="faq-icon">+</span>
         </div>
         <div class="faq-a">
-          <p>sagot</p>
+          <p>Yes, parking is available at both the cathedral and the reception venue. We recommend arriving a few minutes early to settle in comfortably before the ceremony begins.</p>
         </div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          Question?<span class="faq-icon">+</span>
+          Can I take photos during the ceremony?<span class="faq-icon">+</span>
         </div>
         <div class="faq-a">
-          <p>sagot</p>
+          <p>We've hired a wonderful photographer to capture every moment so you can be fully present with us. We kindly ask that you keep your phones away during the ceremony. Feel free to snap away at the reception!</p>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -387,8 +379,8 @@
           <option value="Accepts">Joyfully Accepts</option>
           <option value="Declines">Regretfully Declines</option>
         </select>
-        <textarea class="form-field" id="entryMessage" placeholder="Message for the couple" rows="3"></textarea>
-        <button type="submit" class="btn btn-gold" style="width:100%; margin-top:1rem; font-size:.85rem;">Confirm Attendance</button>
+        <textarea class="form-field" id="entryMessage" placeholder="Message for the couple (optional)" rows="3"></textarea>
+        <button type="submit" class="btn btn-gold" id="rsvpBtn" style="width:100%; margin-top:1rem; font-size:.85rem;">Confirm Attendance</button>
         <div class="form-feedback" id="formFeedback"></div>
       </form>
     </div>
@@ -401,7 +393,7 @@
   </footer>
 
   <script>
-    // Cursor
+    // ── Cursor ──
     const dot  = document.querySelector('.cur-dot');
     const glow = document.querySelector('.cur-glow');
     document.addEventListener('mousemove', e => {
@@ -410,22 +402,19 @@
       setTimeout(()=>{ glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, 55);
     });
 
-    // Parallax on hero image
+    // ── Parallax + Reveal ──
     window.addEventListener('scroll', () => {
       const img = document.querySelector('.parallax-img img');
       if(img) img.style.transform = `translateY(${window.scrollY * 0.15}px)`;
-
-      // Reveal
       document.querySelectorAll('.reveal').forEach(el => {
         if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('in');
       });
     });
-    // Trigger on load
     document.querySelectorAll('.reveal').forEach(el => {
       if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('in');
     });
 
-    // Countdown
+    // ── Countdown ──
     const target = new Date('May 11, 2026 13:00:00').getTime();
     function tick() {
       const diff = target - Date.now();
@@ -438,41 +427,61 @@
     }
     tick(); setInterval(tick, 1000);
 
-    // FAQ
+    // ── FAQ ──
     function toggleFaq(el) {
       el.parentElement.classList.toggle('open');
     }
 
-    // RSVP
-    const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfX-jKtXVeqpfzm6HNvz57RcehFE9iXhE3YTyEpgbfct7NMhA/formResponse';
-    const FIELDS = {
-      name:'entry.877086558', email:'entry.1498135098',
-      attendance:'entry.2606285', message:'entry.273053581'
-    };
-    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+    // ══════════════════════════════════════════════
+    // ── RSVP — Google Apps Script Web App ─────────
+    // ══════════════════════════════════════════════
+    //
+
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwToUGqFILE_IxYOaQCSDyb66QpYh6qxbrawbnREsW_5pQ-ApESTsD2p3_3s9q2lw4J/exec';
+
+    document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const btn = this.querySelector('button');
+
+      const btn = document.getElementById('rsvpBtn');
       const fb  = document.getElementById('formFeedback');
-      btn.textContent = 'Sending…'; btn.style.opacity = '.6';
-      fb.style.display = 'block'; fb.style.color = 'var(--text-mid)';
-      fb.textContent = 'Sending your response…';
-      const fd = new FormData();
-      fd.append(FIELDS.name,       document.getElementById('entryName').value);
-      fd.append(FIELDS.email,      document.getElementById('entryEmail').value);
-      fd.append(FIELDS.attendance, document.getElementById('entryAttendance').value);
-      fd.append(FIELDS.message,    document.getElementById('entryMessage').value);
-      fetch(FORM_URL, { method:'POST', mode:'no-cors', body:fd })
-        .then(() => {
-          fb.textContent = '💛 Thank you! Your RSVP has been received.';
-          fb.style.color = 'var(--sage)';
-          btn.textContent = 'Sent ✓'; btn.style.opacity = '1';
+
+      const name       = document.getElementById('entryName').value.trim();
+      const email      = document.getElementById('entryEmail').value.trim();
+      const attendance = document.getElementById('entryAttendance').value;
+      const message    = document.getElementById('entryMessage').value.trim();
+
+      if (!name || !email || !attendance) return;
+
+      btn.textContent   = 'Sending…';
+      btn.disabled      = true;
+      btn.style.opacity = '.6';
+      fb.style.display  = 'block';
+      fb.style.color    = 'var(--text-mid)';
+      fb.textContent    = 'Sending your response…';
+
+      try {
+
+        const params = new URLSearchParams({ name, email, attendance, message });
+        const res    = await fetch(`${APPS_SCRIPT_URL}?${params}`, { method: 'GET' });
+        const data   = await res.json();
+
+        if (data.status === 'success') {
+          fb.textContent    = '💛 Thank you! Your RSVP has been received. Check your email for a confirmation.';
+          fb.style.color    = 'var(--sage)';
+          btn.textContent   = 'Sent ✓';
+          btn.style.opacity = '1';
           this.reset();
-        })
-        .catch(() => {
-          fb.textContent = 'Something went wrong. Please try again.';
-          fb.style.color = '#c0392b';
-          btn.textContent = 'Confirm Attendance'; btn.style.opacity = '1';
-        });
+        } else {
+          throw new Error(data.message || 'Unknown error');
+        }
+      } catch (err) {
+        fb.textContent    = '⚠️ Something went wrong. Please try again or contact us directly.';
+        fb.style.color    = '#c0392b';
+        btn.textContent   = 'Confirm Attendance';
+        btn.disabled      = false;
+        btn.style.opacity = '1';
+        console.error('RSVP error:', err);
+      }
     });
   </script>
 </body>
