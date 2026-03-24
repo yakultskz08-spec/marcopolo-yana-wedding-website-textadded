@@ -86,7 +86,7 @@
     }
     .parent-item:hover { background: var(--bg-alt); }
     .parent-side {
-      font-size: .65rem; text-transform: uppercase;
+      font-family: var(--serif); font-size: .65rem; text-transform: uppercase;
       letter-spacing: 2px; color: var(--gold); margin-bottom: .5rem;
     }
     .parent-names { font-family: var(--serif); font-size: 1rem; line-height: 1.6; }
@@ -100,12 +100,12 @@
       background: var(--bg-alt); padding: 2rem; text-align: center;
     }
     .honor-role {
-      font-size: .65rem; text-transform: uppercase;
+      font-family: var(--serif); font-size: .65rem; text-transform: uppercase;
       letter-spacing: 2px; color: var(--gold); margin-bottom: .5rem; display: block;
     }
     .honor-name { font-family: var(--serif); font-size: 1.1rem; }
 
-    /* ── BRIDESMAIDS / GROOMSMEN (V2) ── */
+    /* ── BRIDESMAIDS / GROOMSMEN ── */
     .bm-table {
       border: 1px solid #e0dbd0;
       border-radius: 14px;
@@ -129,7 +129,7 @@
     .bm-row:nth-child(even) .bm-cell { background: var(--bg-alt); }
     .bm-row:nth-child(odd)  .bm-cell { background: #fff; }
     .bm-cell {
-      padding: .9rem 1.5rem; font-size: .9rem;
+      padding: .9rem 1.5rem; font-family: var(--serif); font-size: .9rem;
       color: var(--text); line-height: 1.4;
     }
     .bm-cell:first-child { border-right: 1px solid #e0dbd0; }
@@ -151,19 +151,21 @@
     }
     .bearer-card:hover { background: var(--bg-alt); }
     .bearer-role {
-      font-size: .6rem; text-transform: uppercase;
+      font-family: var(--serif); font-size: .6rem; text-transform: uppercase;
       letter-spacing: 2px; color: var(--gold);
       margin-bottom: .5rem; display: block;
     }
     .bearer-name { font-family: var(--serif); font-size: .9rem; line-height: 1.3; }
 
-    /* ── PRINCIPAL SPONSORS (V2) ── */
+    /* ── PRINCIPAL SPONSORS ── */
     .sponsor-list { display: flex; flex-direction: column; gap: .6rem; }
     .sp-row {
       background: #fff;
       border: 1px solid #e0dbd0;
       border-radius: 12px;
-      display: grid; grid-template-columns: 36px 1fr 1fr;
+      display: grid;
+      /* number | name 1 | name 2 — on desktop */
+      grid-template-columns: 36px 1fr 1fr;
       align-items: center; overflow: hidden;
       box-shadow: 0 2px 10px rgba(0,0,0,.03);
       transition: box-shadow .25s, transform .2s;
@@ -173,10 +175,13 @@
       padding: 1rem .5rem 1rem 1rem;
       font-family: var(--serif); font-size: .65rem;
       color: var(--gold); text-align: center;
+      /* spans both rows on mobile */
+      align-self: stretch; display: flex; align-items: center; justify-content: center;
     }
     .sp-name {
       padding: 1rem 1.2rem;
-      font-size: .9rem; color: var(--text); line-height: 1.3;
+      font-family: var(--serif); font-size: .9rem;
+      color: var(--text); line-height: 1.3;
       border-left: 1px solid #e0dbd0;
     }
 
@@ -191,7 +196,7 @@
     }
     .sec-sp-card:hover { background: var(--bg-alt); }
     .sec-sp-role {
-      font-size: .6rem; text-transform: uppercase;
+      font-family: var(--serif); font-size: .6rem; text-transform: uppercase;
       letter-spacing: 2px; color: var(--gold);
       margin-bottom: .6rem; display: block;
     }
@@ -207,7 +212,7 @@
       background: var(--bg-dark); padding: 2rem 2.5rem; text-align: center;
     }
     .priest-role {
-      font-size: .65rem; text-transform: uppercase;
+      font-family: var(--serif); font-size: .65rem; text-transform: uppercase;
       letter-spacing: 2px; color: var(--gold);
       margin-bottom: .5rem; display: block;
     }
@@ -230,7 +235,7 @@
       border-top: 1px solid #e8e2d0;
     }
     .page-nav-bar a {
-      font-size: .8rem; text-transform: uppercase; letter-spacing: 2px;
+      font-family: var(--serif); font-size: .8rem; text-transform: uppercase; letter-spacing: 2px;
       text-decoration: none; color: var(--text-mid); transition: color .2s;
     }
     .page-nav-bar a:hover { color: var(--gold); }
@@ -244,8 +249,31 @@
       .bearers-grid { grid-template-columns: repeat(2, 1fr); }
       .sec-sponsors-grid { grid-template-columns: 1fr; }
       .bm-cell { padding: .75rem .8rem; font-size: .8rem; }
-      .sp-row { grid-template-columns: 28px 1fr; }
-      .sp-name:last-child { display: none; }
+
+
+      .sp-row {
+        grid-template-columns: 36px 1fr;
+        grid-template-rows: auto auto;
+      }
+      .sp-num {
+        grid-row: 1 / 3; 
+        padding: 1rem .4rem 1rem .8rem;
+      }
+      .sp-name {
+        padding: .6rem 1rem;
+        font-size: .85rem;
+      }
+
+      .sp-name:nth-child(2) {
+        padding-bottom: .3rem;
+        border-bottom: 1px dashed #e0dbd0;
+      }
+
+      .sp-name:nth-child(3) {
+        padding-top: .3rem;
+ 
+        display: block !important;
+      }
     }
   </style>
 </head>
@@ -322,7 +350,7 @@
       </div>
     </div>
 
-    <!-- ── BRIDESMAIDS & GROOMSMEN (V2 style) ── -->
+    <!-- ── BRIDESMAIDS & GROOMSMEN ── -->
     <div class="ent-block reveal">
       <div class="ent-block-title">Bridesmaids & Groomsmen</div>
       <div class="bm-table">
@@ -386,7 +414,7 @@
 
     <div class="gold-divider reveal"><span>✦</span></div>
 
-    <!-- ── PRINCIPAL SPONSORS (V2 style) ── -->
+    <!-- ── PRINCIPAL SPONSORS ── -->
     <div class="ent-block reveal">
       <div class="ent-block-title">Principal Sponsors</div>
       <div class="sponsor-list">
@@ -441,7 +469,7 @@
       </div>
     </div>
 
-  </div><!-- end entourage-wrap -->
+  </div>
 
   <div class="page-nav-bar">
     <a href="index.html">← Back to Home</a>
