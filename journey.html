@@ -40,28 +40,38 @@
       color: var(--text-mid); font-size: 1.05rem; line-height: 1.85;
     }
 
-    /* ── STAGE PROGRESS NAV ── */
+    /* ── BOTTOM PROGRESS NAV ── */
+
+    body { padding-bottom: 68px; }
+
     .progress-nav {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid #e8e2d0;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255,255,255,.08);
       padding: 0 4%;
       display: flex; align-items: center; gap: 0;
       overflow-x: auto; scrollbar-width: none;
+      box-shadow: 0 -4px 24px rgba(0,0,0,.18);
     }
     .progress-nav::-webkit-scrollbar { display: none; }
     .pn-item {
       flex-shrink: 0;
-      padding: 1.1rem 1.4rem;
-      font-family: var(--serif); font-size: .72rem;
+      padding: 1.1rem 1.3rem;
+      font-family: var(--serif); font-size: .68rem;
       text-transform: uppercase; letter-spacing: 1.5px;
-      color: var(--text-soft); cursor: pointer;
-      border-bottom: 2px solid transparent;
+      color: rgba(255,255,255,.38); cursor: pointer;
+      border-top: 2px solid transparent;
       transition: color .25s, border-color .25s;
       white-space: nowrap;
       text-decoration: none; display: block;
     }
-    .pn-item:hover, .pn-item.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .pn-item:hover { color: rgba(255,255,255,.75); }
+    .pn-item.active {
+      color: var(--gold);
+      border-top-color: var(--gold);
+    }
 
     /* ── STAGE SECTION ── */
     .stage {
@@ -103,20 +113,26 @@
 
     /* ── PER-STAGE CAROUSEL ── */
     .s-carousel { position: relative; }
-    .s-track-wrap { overflow: hidden; }
+    .s-track-wrap { overflow: hidden; border-radius: 10px; }
     .s-track {
       display: flex;
       transition: transform .65s cubic-bezier(.4,0,.2,1);
     }
-    .s-slide { flex-shrink: 0; padding: 0 .6rem; }
-    .s-slide img, .s-slide .s-ph {
+    .s-slide { flex-shrink: 0; padding: 0 .5rem; }
+
+
+    .s-slide img,
+    .s-slide .s-ph {
       width: 100%; display: block; object-fit: cover;
+
+      aspect-ratio: 12 / 9;
+      height: auto;
+      border-radius: 8px;
     }
-    .s-slide img { height: 420px; filter: sepia(6%); transition: filter .4s; }
+    .s-slide img { filter: sepia(6%); transition: filter .4s; }
     .s-slide img:hover { filter: sepia(0%); }
 
     .s-ph {
-      height: 420px;
       background: var(--bg-alt);
       border: 1px dashed #ccc;
       display: flex; flex-direction: column;
@@ -139,6 +155,7 @@
       cursor: pointer; font-size: 1rem; font-family: var(--body);
       display: flex; align-items: center; justify-content: center;
       transition: background .2s, color .2s; flex-shrink: 0;
+      border-radius: 4px;
     }
     .s-btn:hover { background: var(--text); color: #fff; }
     .s-btn:disabled { opacity: .25; cursor: default; }
@@ -178,7 +195,8 @@
       border-top: 1px solid #e8e2d0;
     }
     .page-nav-bar a {
-      font-size: .8rem; text-transform: uppercase; letter-spacing: 2px;
+      font-family: var(--serif); font-size: .8rem;
+      text-transform: uppercase; letter-spacing: 2px;
       text-decoration: none; color: var(--text-mid); transition: color .2s;
     }
     .page-nav-bar a:hover { color: var(--gold); }
@@ -187,8 +205,7 @@
     @media (max-width: 768px) {
       .stage-header { gap: 1rem; }
       .stage-num { font-size: 3rem; }
-      .s-slide img, .s-ph { height: 260px; }
-      .pn-item { padding: .9rem 1rem; font-size: .65rem; }
+      .pn-item { padding: .85rem .9rem; font-size: .6rem; }
     }
   </style>
 </head>
@@ -204,6 +221,7 @@
       <li><a href="story.html">Story</a></li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="journey.html" class="active">Journey</a></li>
+      <li><a href="entourage.html">Entourage</a></li>
       <li><a href="index.html#rsvp">RSVP</a></li>
     </ul>
   </nav>
@@ -227,17 +245,6 @@
     </div>
   </div>
 
-  <!-- Sticky nav -->
-  <div class="progress-nav" id="progressNav">
-    <a class="pn-item" href="#stage-dates">Getting to Know Each Other</a>
-    <a class="pn-item" href="#stage-gtky">Ligawan</a>
-    <a class="pn-item" href="#stage-ligaw">Dating</a>
-    <a class="pn-item" href="#stage-family">With the Family</a>
-    <a class="pn-item" href="#stage-pamamanhikan">With SFC</a>
-    <a class="pn-item" href="#stage-proposal">Proposal</a>
-    <a class="pn-item" href="#stage-sfc">Pamamanhikan</a>
-  </div>
-
   <!-- ░░ STAGE 1 — Getting to Know Each Other ░░ -->
   <section class="stage" id="stage-dates">
     <div class="stage-inner">
@@ -255,14 +262,14 @@
         <div class="s-track-wrap"><div class="s-track">
           <div class="s-slide"><img src="images/GTKY/20230310_202237.jpg" alt="GTKY"></div>
           <div class="s-slide"><img src="images/GTKY/IMG-20230310-WA0009.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/GTKY/IMG-20230411-WA0000.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/GTKY/IMG-20230411-WA0006.jpg" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/GTKY/IMG-20230411-WA0000.jpg" alt="GTKY" style="object-position:60% 15%;"></div>
+          <div class="s-slide"><img src="images/GTKY/IMG-20230411-WA0006.jpg" alt="GTKY" style="object-position:60% 15%;"></div>
           <div class="s-slide"><img src="images/GTKY/IMG_20230414_163955.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/GTKY/IMG_20230425_172052.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/GTKY/Messenger_creation_1677535066038062.jpeg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/GTKY/Messenger_creation_748443510293837.jpeg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/GTKY/Messenger_creation_778949276993949.jpeg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/GTKY/Messenger_creation_9BBCC4FA-B3B9-49AA-96F0-61AA047EDDED.jpeg" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/GTKY/IMG_20230425_172052.jpg" alt="GTKY" style="object-position:20% 15%;"></div>
+          <div class="s-slide"><img src="images/GTKY/Messenger_creation_1677535066038062.jpeg" alt="GTKY" style="object-position: 30% 25%;"></div>
+          <div class="s-slide"><img src="images/GTKY/Messenger_creation_748443510293837.jpeg" alt="GTKY" style="object-position:60% 5%;"></div>
+          <div class="s-slide"><img src="images/GTKY/Messenger_creation_778949276993949.jpeg" alt="GTKY" style="object-position:60% 15%;"></div>
+          <div class="s-slide"><img src="images/GTKY/Messenger_creation_9BBCC4FA-B3B9-49AA-96F0-61AA047EDDED.jpeg" alt="GTKY" style="object-position:60% 15%;"></div>
         </div></div>
         <div class="s-controls">
           <button class="s-btn prev">←</button>
@@ -289,17 +296,15 @@
       </p>
       <div class="s-carousel reveal">
         <div class="s-track-wrap"><div class="s-track">
-          <div class="s-slide"><img src="images/Ligawan/20230416_115820.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Ligawan/20230430_074632.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Ligawan/20230430_085424.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Ligawan/20230501_201743.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Ligawan/IMG_20230404_091253.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Ligawan/IMG_20230406_144104.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Ligawan/IMG_20230406_144142.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Ligawan/IMG_20230416_142849.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Ligawan/e4f897fb-b2bb-4fd5-b747-073cfe5204c8.jpg" alt="GTKY"></div>
-          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">GTKY · Photo 3</span></div></div>
-          <div class="s-slide"><div class="s-ph"><span class="ph-icon"></span><span class="ph-lbl">GTKY · Photo 4</span></div></div>
+          <div class="s-slide"><img src="images/Ligawan/20230416_115820.jpg" alt="Ligawan" style="object-position:60% 75%;"></div>
+          <div class="s-slide"><img src="images/Ligawan/20230430_074632.jpg" alt="Ligawan"style="object-position: 0% 65%;"></div>
+          <div class="s-slide"><img src="images/Ligawan/20230430_085424.jpg" alt="Ligawan" style="object-position:60% 65%;"></div>
+          <div class="s-slide"><img src="images/Ligawan/20230501_201743.jpg" alt="Ligawan"></div>
+          <div class="s-slide"><img src="images/Ligawan/IMG_20230404_091253.jpg" alt="Ligawan"></div>
+          <div class="s-slide"><img src="images/Ligawan/IMG_20230406_144104.jpg" alt="Ligawan"></div>
+          <div class="s-slide"><img src="images/Ligawan/IMG_20230406_144142.jpg" alt="Ligawan"></div>
+          <div class="s-slide"><img src="images/Ligawan/IMG_20230416_142849.jpg" alt="Ligawan" style="object-position:60% 75%;"></div>
+          <div class="s-slide"><img src="images/Ligawan/e4f897fb-b2bb-4fd5-b747-073cfe5204c8.jpg" alt="Ligawan" style="object-position:60% 75%;"></div>
         </div></div>
         <div class="s-controls">
           <button class="s-btn prev">←</button>
@@ -326,37 +331,35 @@
       </p>
       <div class="s-carousel reveal">
         <div class="s-track-wrap"><div class="s-track">
-          <div class="s-slide"><img src="images/Dates/20230513_142739.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/DSC03863.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/DSC04360.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG-1c13bda709c95340c2c98e6129441004-V.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20230720_002632_136.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20230820_202205.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20230918_000148_975.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20231102_154939.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20231112_153302.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20240218_165739.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20240405_152136.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20240405_154027.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20240410_213430.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20240419_123721.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20240423_144545.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20240507_205636.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20240616_124702.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20241101_080840.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20241113_200436.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20241202_145330.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20241225_210431.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20241227_154546.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20250311_000919_798.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20250407_164705.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20250501_090029.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/IMG_20250503_232729_1.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/Screenshot_20230917_235441_com.huawei.himovie.overseas_edit_34943202393625.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/Screenshot_20240101_015342_com.huawei.himovie.overseas_edit_66932683343953.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/Dates/Screenshot_20250101_010619_com.huawei.himovie.overseas.jpg" alt="GTKY"></div>
-          
-          
+          <div class="s-slide"><img src="images/Dates/20230513_142739.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/DSC03863.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/DSC04360.jpg" alt="Dating" style="object-position:60% 65%;"></div>
+          <div class="s-slide"><img src="images/Dates/IMG-1c13bda709c95340c2c98e6129441004-V.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20230720_002632_136.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20230820_202205.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20230918_000148_975.jpg" alt="Dating" style="object-position:20% 99%;"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20231102_154939.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20231112_153302.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20240218_165739.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20240405_152136.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20240405_154027.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20240410_213430.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20240419_123721.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20240423_144545.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20240507_205636.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20240616_124702.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20241101_080840.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20241113_200436.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20241202_145330.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20241225_210431.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20241227_154546.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20250311_000919_798.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20250407_164705.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20250501_090029.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/IMG_20250503_232729_1.jpg" alt="Dating"></div>
+          <div class="s-slide"><img src="images/Dates/Screenshot_20230917_235441_com.huawei.himovie.overseas_edit_34943202393625.jpg" alt="Dating" style="object-position:80% 95%;"></div>
+          <div class="s-slide"><img src="images/Dates/Screenshot_20240101_015342_com.huawei.himovie.overseas_edit_66932683343953.jpg" alt="Dating" style="object-position:60% 15%;"></div>
+
         </div></div>
         <div class="s-controls">
           <button class="s-btn prev">←</button>
@@ -383,14 +386,13 @@
       </p>
       <div class="s-carousel reveal">
         <div class="s-track-wrap"><div class="s-track">
-          <div class="s-slide"><img src="images/With the Family/129070a9-f49f-429a-863a-121b970e6a94.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With the Family/14593654-f52b-4869-9250-eea482405cfe.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With the Family/214a0def-68a5-4e0e-aa24-be07cdfa189c.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With the Family/64526fc5-86a1-4961-b466-40e8b5d6266c.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With the Family/9d6af7ff-9ddc-4bfe-9981-24f2347f53e3.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With the Family/b8a2a1dd-93f0-4448-ac8d-3aca92fe345d.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With the Family/d7be3344-7098-4c3e-a48d-c0365101d4fc.jpg" alt="GTKY"></div>
-          
+          <div class="s-slide"><img src="images/With the Family/129070a9-f49f-429a-863a-121b970e6a94.jpg" alt="Family"></div>
+          <div class="s-slide"><img src="images/With the Family/14593654-f52b-4869-9250-eea482405cfe.jpg" alt="Family"></div>
+          <div class="s-slide"><img src="images/With the Family/214a0def-68a5-4e0e-aa24-be07cdfa189c.jpg" alt="Family"></div>
+          <div class="s-slide"><img src="images/With the Family/64526fc5-86a1-4961-b466-40e8b5d6266c.jpg" alt="Family"></div>
+          <div class="s-slide"><img src="images/With the Family/9d6af7ff-9ddc-4bfe-9981-24f2347f53e3.jpg" alt="Family"></div>
+          <div class="s-slide"><img src="images/With the Family/b8a2a1dd-93f0-4448-ac8d-3aca92fe345d.jpg" alt="Family"></div>
+          <div class="s-slide"><img src="images/With the Family/d7be3344-7098-4c3e-a48d-c0365101d4fc.jpg" alt="Family"></div>
         </div></div>
         <div class="s-controls">
           <button class="s-btn prev">←</button>
@@ -417,12 +419,12 @@
       </p>
       <div class="s-carousel reveal">
         <div class="s-track-wrap"><div class="s-track">
-          <div class="s-slide"><img src="images/With SFC/08b0bb53-2d16-415e-88eb-68dc1eb0103b (1).jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With SFC/0dc85dbc-677a-4ff2-af01-f7ddcdb4875c.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With SFC/337b1928-6818-447d-86f7-0970ef9379a3.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With SFC/558447237_871385288887227_133221763687271332_n..jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With SFC/592bcb89-395f-42e5-86ce-daac563614b9.jpg" alt="GTKY"></div>
-          <div class="s-slide"><img src="images/With SFC/661b2c8d-ef2f-4f44-850b-c0295e677553 (1).jpg" alt="GTKY"></div>
+          <div class="s-slide"><img src="images/With SFC/08b0bb53-2d16-415e-88eb-68dc1eb0103b (1).jpg" alt="SFC"></div>
+          <div class="s-slide"><img src="images/With SFC/0dc85dbc-677a-4ff2-af01-f7ddcdb4875c.jpg" alt="SFC"></div>
+          <div class="s-slide"><img src="images/With SFC/337b1928-6818-447d-86f7-0970ef9379a3.jpg" alt="SFC"></div>
+          <div class="s-slide"><img src="images/With SFC/558447237_871385288887227_133221763687271332_n.jpg" alt="SFC"></div>
+          <div class="s-slide"><img src="images/With SFC/592bcb89-395f-42e5-86ce-daac563614b9.jpg" alt="SFC"></div>
+          <div class="s-slide"><img src="images/With SFC/661b2c8d-ef2f-4f44-850b-c0295e677553 (1).jpg" alt="SFC" style="object-position:30% 85%;"></div>
         </div></div>
         <div class="s-controls">
           <button class="s-btn prev">←</button>
@@ -445,21 +447,21 @@
         </div>
       </div>
       <p class="stage-desc reveal">
-        A heartfelt “yes” to a lifetime of love and choosing each other every day.
+        A heartfelt "yes" to a lifetime of love and choosing each other every day.
       </p>
       <div class="s-carousel reveal">
         <div class="s-track-wrap"><div class="s-track">
-          <div class="s-slide"><img src="images/The Proposal/53fa01dd-009b-4031-81f4-00f249a86e0e.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/639d04d3-629d-4a7a-a2ef-d1d558c5e6ff.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/6d50a7e2-567a-464b-8bc2-7ab7f6136342.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/7d316d91-2c11-404a-a12b-9aab247c0f66.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/8423341a-1f8c-46a5-9321-ef20709e10a1.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/84c7e772-4a51-4eec-aa56-1294a43c42ad.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/de752232-43ec-4d69-8648-7ba53ae0caff.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/eca7f06c-4d3f-401f-b497-2d804b0cbe4d.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/f0f26682-c1a6-461d-9847-98e3c74ed5d4.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/fa08f59b-febc-4c66-8b50-33bd4f5c6efb.jpg" alt="Proposal" style="object-position:center 20%;"></div>
-          <div class="s-slide"><img src="images/The Proposal/ffad7755-8407-4220-a94a-cee2558bd73d.jpg" alt="Proposal" style="object-position:center 20%;"></div>
+          <div class="s-slide"><img src="images/The Proposal/53fa01dd-009b-4031-81f4-00f249a86e0e.jpg" alt="Proposal"></div>
+          <div class="s-slide"><img src="images/The Proposal/639d04d3-629d-4a7a-a2ef-d1d558c5e6ff.jpg" alt="Proposal"></div>
+          <div class="s-slide"><img src="images/The Proposal/6d50a7e2-567a-464b-8bc2-7ab7f6136342.jpg" alt="Proposal"></div>
+          <div class="s-slide"><img src="images/The Proposal/7d316d91-2c11-404a-a12b-9aab247c0f66.jpg" alt="Proposal"></div>
+          <div class="s-slide"><img src="images/The Proposal/8423341a-1f8c-46a5-9321-ef20709e10a1.jpg" alt="Proposal" style="object-position:100% 65%;"></div>
+          <div class="s-slide"><img src="images/The Proposal/84c7e772-4a51-4eec-aa56-1294a43c42ad.jpg" alt="Proposal"></div>
+          <div class="s-slide"><img src="images/The Proposal/de752232-43ec-4d69-8648-7ba53ae0caff.jpg" alt="Proposal" style="object-position:60% 75%;"></div>
+          <div class="s-slide"><img src="images/The Proposal/eca7f06c-4d3f-401f-b497-2d804b0cbe4d.jpg" alt="Proposal"></div>
+          <div class="s-slide"><img src="images/The Proposal/f0f26682-c1a6-461d-9847-98e3c74ed5d4.jpg" alt="Proposal"></div>
+          <div class="s-slide"><img src="images/The Proposal/fa08f59b-febc-4c66-8b50-33bd4f5c6efb.jpg" alt="Proposal"></div>
+          <div class="s-slide"><img src="images/The Proposal/ffad7755-8407-4220-a94a-cee2558bd73d.jpg" alt="Proposal"></div>
         </div></div>
         <div class="s-controls">
           <button class="s-btn prev">←</button>
@@ -486,17 +488,16 @@
       </p>
       <div class="s-carousel reveal">
         <div class="s-track-wrap"><div class="s-track">
-          <div class="s-slide"><img src="images/Pamamanhikan/3edd1ed8-5f89-42a2-bff7-9464e459b92a (1).jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/47122a0f-7b4f-4c67-bf2b-3700dddd6037.jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/634225293_4341173379491707_6654718101457996864_n.jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/634927660_2085841865506587_8315364356334740426_n.jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/637229254_922326363502712_7898520425071449955_n (1).jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/639647539_4145649719097809_8490191143073513723_n.jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/639817949_1657572015668425_285867503039191828_n.jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/642496203_1421104493121794_7740835001998807204_n.jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/7bd561c3-0d98-422a-8118-52a4a71bbb89.jpg" alt="SFC" style="object-position:center 40%;"></div>
-          <div class="s-slide"><img src="images/Pamamanhikan/f1a466d3-9829-4872-85ba-5232c1825e6a.jpg" alt="SFC" style="object-position:center 40%;"></div>
-          
+          <div class="s-slide"><img src="images/Pamamanhikan/3edd1ed8-5f89-42a2-bff7-9464e459b92a (1).jpg" alt="Pamamanhikan"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/47122a0f-7b4f-4c67-bf2b-3700dddd6037.jpg" alt="Pamamanhikan" style="object-position:60% 65%;"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/634225293_4341173379491707_6654718101457996864_n.jpg" alt="Pamamanhikan"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/634927660_2085841865506587_8315364356334740426_n.jpg" alt="Pamamanhikan"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/637229254_922326363502712_7898520425071449955_n (1).jpg" alt="Pamamanhikan"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/639647539_4145649719097809_8490191143073513723_n.jpg" alt="Pamamanhikan"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/639817949_1657572015668425_285867503039191828_n.jpg" alt="Pamamanhikan" style="object-position:60% 65%;"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/642496203_1421104493121794_7740835001998807204_n.jpg" alt="Pamamanhikan"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/7bd561c3-0d98-422a-8118-52a4a71bbb89.jpg" alt="Pamamanhikan" style="object-position:60% 85%;"></div>
+          <div class="s-slide"><img src="images/Pamamanhikan/f1a466d3-9829-4872-85ba-5232c1825e6a.jpg" alt="Pamamanhikan"></div>
         </div></div>
         <div class="s-controls">
           <button class="s-btn prev">←</button>
@@ -525,6 +526,17 @@
     <p style="margin-top:1.5rem; font-size:.75rem; color:#888; letter-spacing:2px;">MAY 11, 2026 · VIRAC, CATANDUANES</p>
   </footer>
 
+
+  <div class="progress-nav" id="progressNav">
+    <a class="pn-item" href="#stage-dates">Getting to Know Each Other</a>
+    <a class="pn-item" href="#stage-gtky">Ligawan</a>
+    <a class="pn-item" href="#stage-ligaw">Dating</a>
+    <a class="pn-item" href="#stage-family">With the Family</a>
+    <a class="pn-item" href="#stage-pamamanhikan">With SFC</a>
+    <a class="pn-item" href="#stage-proposal">Proposal</a>
+    <a class="pn-item" href="#stage-sfc">Pamamanhikan</a>
+  </div>
+
   <script>
     /* ── Cursor ── */
     const dot  = document.querySelector('.cur-dot');
@@ -540,16 +552,17 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    /* ── Sticky nav active state ── */
-    const stageEls  = document.querySelectorAll('.stage');
-    const navAnchors= document.querySelectorAll('.pn-item');
-    const stageObs  = new IntersectionObserver(entries => {
+
+    const stageEls   = document.querySelectorAll('.stage');
+    const navAnchors = document.querySelectorAll('.pn-item');
+    const stageObs   = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if(e.isIntersecting) {
+        if (e.isIntersecting) {
           navAnchors.forEach(n => n.classList.remove('active'));
           const match = document.querySelector(`.pn-item[href="#${e.target.id}"]`);
-          if(match) {
+          if (match) {
             match.classList.add('active');
+
             match.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
           }
         }
@@ -559,13 +572,13 @@
 
     /* ── Per-stage carousel factory ── */
     document.querySelectorAll('.s-carousel').forEach(car => {
-      const track   = car.querySelector('.s-track');
-      const slides  = Array.from(car.querySelectorAll('.s-slide'));
-      const dotsWrap= car.querySelector('.s-dots');
-      const countEl = car.querySelector('.s-count');
-      const prevBtn = car.querySelector('.prev');
-      const nextBtn = car.querySelector('.next');
-      const total   = slides.length;
+      const track    = car.querySelector('.s-track');
+      const slides   = Array.from(car.querySelectorAll('.s-slide'));
+      const dotsWrap = car.querySelector('.s-dots');
+      const countEl  = car.querySelector('.s-count');
+      const prevBtn  = car.querySelector('.prev');
+      const nextBtn  = car.querySelector('.next');
+      const total    = slides.length;
       let cur = 0;
 
       function vis() {
@@ -580,7 +593,7 @@
       function buildDots() {
         dotsWrap.innerHTML = '';
         const pages = Math.ceil(total / vis());
-        for(let i = 0; i < pages; i++) {
+        for (let i = 0; i < pages; i++) {
           const d = document.createElement('div');
           d.className = 's-dot';
           d.addEventListener('click', () => go(i * vis()));
@@ -591,11 +604,9 @@
       function render() {
         cur = Math.min(cur, maxCur());
         const v = vis();
-        // translate: each slide is 100/v %, so shift by cur slides
         track.style.transform = `translateX(-${cur * (100 / v)}%)`;
-        // dots
         const page = Math.floor(cur / v);
-        dotsWrap.querySelectorAll('.s-dot').forEach((d,i) => d.classList.toggle('on', i === page));
+        dotsWrap.querySelectorAll('.s-dot').forEach((d, i) => d.classList.toggle('on', i === page));
         countEl.textContent = `${page + 1} / ${Math.ceil(total / v)}`;
         prevBtn.disabled = cur === 0;
         nextBtn.disabled = cur >= maxCur();
@@ -608,11 +619,11 @@
 
       /* touch swipe */
       let touchX = 0;
-      track.addEventListener('touchstart', e => touchX = e.touches[0].clientX, { passive:true });
-      track.addEventListener('touchend',   e => {
+      track.addEventListener('touchstart', e => touchX = e.touches[0].clientX, { passive: true });
+      track.addEventListener('touchend', e => {
         const dx = e.changedTouches[0].clientX - touchX;
-        if(Math.abs(dx) > 40) dx < 0 ? go(cur + vis()) : go(cur - vis());
-      }, { passive:true });
+        if (Math.abs(dx) > 40) dx < 0 ? go(cur + vis()) : go(cur - vis());
+      }, { passive: true });
 
       setWidths(); buildDots(); render();
       window.addEventListener('resize', () => { setWidths(); buildDots(); render(); });
