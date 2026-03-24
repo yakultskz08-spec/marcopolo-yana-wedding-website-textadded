@@ -51,7 +51,7 @@
       transition: transform .1s linear;
     }
 
-    /* rotating seal — CENTRED between the two columns */
+
     .sun-seal {
       position: absolute;
       top: 50%; left: 50%;
@@ -113,7 +113,7 @@
       display:grid; grid-template-columns: repeat(3,1fr);
       border-top: 1px solid rgba(255,255,255,.12);
     }
-    .detail-card {
+    .detail-card { text-align:center;
       padding: 3.5rem 2.5rem;
       border-right: 1px solid rgba(255,255,255,.12);
       transition: background .4s;
@@ -198,7 +198,7 @@
       .message-grid { grid-template-columns:1fr; gap:2.5rem; }
       .message-img-wrap { height:320px; }
       .details-grid { grid-template-columns:1fr; }
-      .detail-card { border-right:none; border-bottom:1px solid rgba(255,255,255,.12); }
+      .detail-card { text-align:center; border-right:none; border-bottom:1px solid rgba(255,255,255,.12); }
       .timer { gap:1.5rem; }
       .t-val { font-size:2.5rem; }
     }
@@ -221,7 +221,7 @@
     </ul>
   </nav>
 
-  <!-- ░░ HERO ░░ -->
+  <!-- HERO  -->
   <section class="hero" id="home">
     <div class="hero-text">
       <span class="wedding-of">The wedding of</span>
@@ -236,10 +236,10 @@
     </div>
 
     <div class="hero-img-wrap parallax-img">
-      <img src="images/BLD03128.jpg" alt="Marco Polo and Elyannah">
+      <img src="images/BLD03307.jpg" alt="Marco Polo and Elyannah">
     </div>
 
-    <!-- ROTATING SEAL — centred between the two columns -->
+
     <div class="sun-seal">
       <svg viewBox="0 0 100 100" width="130" height="130">
         <path id="cp" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" fill="transparent"/>
@@ -253,11 +253,11 @@
     </div>
   </section>
 
-  <!-- ░░ MESSAGE FROM THE COUPLE ░░ -->
+
   <section class="message-sec sec reveal" id="story">
     <div class="message-grid">
       <div class="message-img-wrap reveal">
-        <img src="images/BLD03039.jpg" alt="Marco Polo and Elyannah">
+        <img src="images/BLD03128.jpg" alt="Marco Polo and Elyannah">
       </div>
       <div class="message-content reveal">
         <h3>Message from the Couple</h3>
@@ -274,7 +274,7 @@
     </div>
   </section>
 
-  <!-- ░░ DETAILS ░░ -->
+  <!-- DETAILS  -->
   <section class="details-sec" id="details">
     <div class="details-head">
       <span class="label">Save the Date</span>
@@ -302,7 +302,7 @@
     </div>
   </section>
 
-  <!-- ░░ COUNTDOWN ░░ -->
+  <!-- COUNTDOWN  -->
   <div class="countdown-sec">
     <div class="count-label">Counting down to forever</div>
     <div class="timer" id="timer">
@@ -313,7 +313,7 @@
     </div>
   </div>
 
-  <!-- ░░ FAQ ░░ -->
+  <!-- FAQ  -->
   <section class="faq-sec sec" id="faq">
     <div style="text-align:center; margin-bottom:3.5rem;" class="reveal">
       <span class="label">Got questions?</span>
@@ -323,11 +323,10 @@
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          What should I wear?
-<span class="faq-icon">+</span>
+          What should I wear?<span class="faq-icon">+</span>
         </div>
         <div class="faq-a">
-          <p>Come dressed in your favorite shade of yellow and celebrate with us in warmth and joy! Your presence already brightens our day—but a touch of yellow will make it even more special.</p>
+          <p>Come dressed in your favorite shade of gold, yellow, or champagne and celebrate with us in warmth and joy! Your presence already brightens our day — but a touch of sunlight will make it even more special. Gents, tan suits are perfect.</p>
         </div>
       </div>
 
@@ -336,7 +335,7 @@
           Are gifts required?<span class="faq-icon">+</span>
         </div>
         <div class="faq-a">
-          <p>Your presence is the greatest gift we could ask for. However, if you wish to bless us further, a simple monetary gift would be deeply appreciated as we begin our life together.</p>
+          <p>Your presence is the greatest gift we could ask for. However, if you wish to bless us further, a simple monetary gift would be deeply appreciated as we begin our new life together.</p>
         </div>
       </div>
 
@@ -345,13 +344,32 @@
           Can I bring a plus one?<span class="faq-icon">+</span>
         </div>
         <div class="faq-a">
-          <p>Due to limited seating, we kindly ask that only guests listed on the invitation attend. Thank you for understanding!</p>
+          <p>Due to limited seating, we kindly ask that only guests listed on the invitation attend. Thank you so much for your understanding!</p>
         </div>
       </div>
-  
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Is there parking available?<span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <p>Yes, parking is available at both the cathedral and the reception venue. We recommend arriving a few minutes early to settle in comfortably before the ceremony begins.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I take photos during the ceremony?<span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <p>We've hired a wonderful photographer to capture every moment so you can be fully present with us. We kindly ask that you keep your phones away during the ceremony. Feel free to snap away at the reception!</p>
+        </div>
+      </div>
+
+    </div>
   </section>
 
-  <!-- ░░ RSVP ░░ -->
+  <!-- RSVP  -->
   <section class="rsvp-sec sec" id="rsvp">
     <div class="rsvp-inner">
       <div class="reveal">
