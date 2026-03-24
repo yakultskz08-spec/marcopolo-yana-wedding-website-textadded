@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entourage | Marco Polo & Elyannah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      height: 50vh; min-height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/BLD03307.jpg') center 30% / cover no-repeat;
+      filter: brightness(.38) saturate(.7);
+      transform: scale(1.06);
+    }
+    .page-hero-content { position: relative; z-index: 2; color: #FDFCF6; }
+    .page-hero-content .label  { color: rgba(255,255,255,.55); }
+    .page-hero-content .heading { color: #FDFCF6; font-size: clamp(3rem,6vw,5rem); }
+    .page-hero-content .sub {
+      margin-top: .8rem; font-size: .8rem;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+    }
+
+    /* ── MAIN WRAPPER ── */
+    .entourage-wrap {
+      max-width: 960px; margin: 0 auto;
+      padding: 6rem 5% 7rem;
+    }
+
+    /* ── PRINCIPAL PAIR ── */
+    .principal-pair {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: #e0dbd0;
+      margin-bottom: 4rem;
+      border: 1px solid #e0dbd0;
+    }
+    .pair-card {
+      background: var(--bg-alt);
+      padding: 3rem 2.5rem; text-align: center;
+    }
+    .pair-role {
+      font-family: var(--serif); font-size: .7rem;
+      text-transform: uppercase; letter-spacing: 3px;
+      color: var(--gold); margin-bottom: .8rem; display: block;
+    }
+    .pair-name {
+      font-family: var(--serif); font-size: 1.5rem;
+      line-height: 1.2; color: var(--text);
+    }
+    .pair-sub {
+      font-size: .85rem; color: var(--text-soft);
+      margin-top: .3rem; letter-spacing: 1px;
+    }
+
+    /* ── SECTION BLOCK ── */
+    .ent-block { margin-bottom: 4rem; }
+    .ent-block-title {
+      font-family: var(--serif); font-size: .7rem;
+      text-transform: uppercase; letter-spacing: 3px;
+      color: var(--gold); border-bottom: 1px solid #e0dbd0;
+      padding-bottom: .8rem; margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .ent-block-title::after {
+      content: ''; flex: 1; height: 1px; background: #e0dbd0;
+    }
+
+    /* ── PARENTS ── */
+    .parents-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .parent-item {
+      text-align: center; padding: 1.8rem 1rem;
+      border: 1px solid #e0dbd0; background: var(--bg);
+      transition: background .3s;
+    }
+    .parent-item:hover { background: var(--bg-alt); }
+    .parent-side {
+      font-size: .65rem; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--gold); margin-bottom: .5rem;
+    }
+    .parent-names { font-family: var(--serif); font-size: 1rem; line-height: 1.6; }
+
+    /* ── BESTMAN / MOH ── */
+    .honor-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: #e0dbd0; border: 1px solid #e0dbd0;
+    }
+    .honor-card {
+      background: var(--bg-alt); padding: 2rem; text-align: center;
+    }
+    .honor-role {
+      font-size: .65rem; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--gold); margin-bottom: .5rem; display: block;
+    }
+    .honor-name { font-family: var(--serif); font-size: 1.1rem; }
+
+    /* ── BRIDESMAIDS / GROOMSMEN (V2) ── */
+    .bm-table {
+      border: 1px solid #e0dbd0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,.04);
+    }
+    .bm-thead {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: var(--bg-dark);
+    }
+    .bm-th {
+      padding: 1rem 1.5rem; text-align: center;
+      font-family: var(--serif); font-size: .65rem;
+      text-transform: uppercase; letter-spacing: 2.5px; color: var(--gold);
+    }
+    .bm-th:first-child { border-right: 1px solid rgba(255,255,255,.1); }
+    .bm-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-top: 1px solid #e0dbd0;
+    }
+    .bm-row:nth-child(even) .bm-cell { background: var(--bg-alt); }
+    .bm-row:nth-child(odd)  .bm-cell { background: #fff; }
+    .bm-cell {
+      padding: .9rem 1.5rem; font-size: .9rem;
+      color: var(--text); line-height: 1.4;
+    }
+    .bm-cell:first-child { border-right: 1px solid #e0dbd0; }
+    .bm-num {
+      font-family: var(--serif); font-size: .58rem;
+      color: var(--gold); display: block;
+      letter-spacing: 1px; margin-bottom: .15rem;
+    }
+
+    /* ── BEARERS ── */
+    .bearers-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .bearer-card {
+      text-align: center; padding: 1.5rem 1rem;
+      border: 1px solid #e0dbd0; background: var(--bg);
+      transition: background .3s;
+    }
+    .bearer-card:hover { background: var(--bg-alt); }
+    .bearer-role {
+      font-size: .6rem; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--gold);
+      margin-bottom: .5rem; display: block;
+    }
+    .bearer-name { font-family: var(--serif); font-size: .9rem; line-height: 1.3; }
+
+    /* ── PRINCIPAL SPONSORS (V2) ── */
+    .sponsor-list { display: flex; flex-direction: column; gap: .6rem; }
+    .sp-row {
+      background: #fff;
+      border: 1px solid #e0dbd0;
+      border-radius: 12px;
+      display: grid; grid-template-columns: 36px 1fr 1fr;
+      align-items: center; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.03);
+      transition: box-shadow .25s, transform .2s;
+    }
+    .sp-row:hover { box-shadow: 0 6px 20px rgba(0,0,0,.07); transform: translateX(4px); }
+    .sp-num {
+      padding: 1rem .5rem 1rem 1rem;
+      font-family: var(--serif); font-size: .65rem;
+      color: var(--gold); text-align: center;
+    }
+    .sp-name {
+      padding: 1rem 1.2rem;
+      font-size: .9rem; color: var(--text); line-height: 1.3;
+      border-left: 1px solid #e0dbd0;
+    }
+
+    /* ── SECONDARY SPONSORS ── */
+    .sec-sponsors-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .sec-sp-card {
+      border: 1px solid #e0dbd0; background: var(--bg);
+      padding: 1.4rem 1.5rem; transition: background .3s;
+    }
+    .sec-sp-card:hover { background: var(--bg-alt); }
+    .sec-sp-role {
+      font-size: .6rem; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--gold);
+      margin-bottom: .6rem; display: block;
+    }
+    .sec-sp-names { font-family: var(--serif); font-size: .9rem; line-height: 1.6; }
+
+    /* ── PRIEST ── */
+    .priest-strip {
+      background: var(--bg-dark); color: #FDFCF6;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background-color: rgba(255,255,255,.1);
+    }
+    .priest-card {
+      background: var(--bg-dark); padding: 2rem 2.5rem; text-align: center;
+    }
+    .priest-role {
+      font-size: .65rem; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--gold);
+      margin-bottom: .5rem; display: block;
+    }
+    .priest-name { font-family: var(--serif); font-size: 1.05rem; color: #FDFCF6; }
+
+    /* ── DIVIDER ── */
+    .gold-divider {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin: 3.5rem 0 2rem;
+    }
+    .gold-divider span { font-family: var(--script); font-size: 1.5rem; color: var(--gold); flex-shrink: 0; }
+    .gold-divider::before, .gold-divider::after {
+      content: ''; flex: 1; height: 1px; background: #e0dbd0;
+    }
+
+    /* ── BOTTOM NAV ── */
+    .page-nav-bar {
+      background: var(--bg-alt); padding: 2rem 7%;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid #e8e2d0;
+    }
+    .page-nav-bar a {
+      font-size: .8rem; text-transform: uppercase; letter-spacing: 2px;
+      text-decoration: none; color: var(--text-mid); transition: color .2s;
+    }
+    .page-nav-bar a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .principal-pair,
+      .honor-grid,
+      .priest-strip { grid-template-columns: 1fr; }
+      .parents-grid { grid-template-columns: 1fr; }
+      .bearers-grid { grid-template-columns: repeat(2, 1fr); }
+      .sec-sponsors-grid { grid-template-columns: 1fr; }
+      .bm-cell { padding: .75rem .8rem; font-size: .8rem; }
+      .sp-row { grid-template-columns: 28px 1fr; }
+      .sp-name:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="cur-dot"></div>
+  <div class="cur-glow"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">M & E</a>
+    <ul class="nav-links">
+      <li><a href="story.html">Story</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="entourage.html" class="active">Entourage</a></li>
+      <li><a href="index.html#rsvp">RSVP</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-content">
+      <span class="label">The people who made us</span>
+      <h1 class="heading">Our Entourage</h1>
+      <p class="sub">May 11, 2026 · Virac, Catanduanes</p>
+    </div>
+  </div>
+
+  <div class="entourage-wrap">
+
+    <!-- ── BRIDE & GROOM ── -->
+    <div class="reveal">
+      <div class="principal-pair">
+        <div class="pair-card">
+          <span class="pair-role">Groom</span>
+          <div class="pair-name">Marco Polo M. Canonoy</div>
+        </div>
+        <div class="pair-card">
+          <span class="pair-role">Bride</span>
+          <div class="pair-name">Elyannah M. Sarmiento</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PARENTS ── -->
+    <div class="ent-block reveal">
+      <div class="ent-block-title">Parents of the Bride & Groom</div>
+      <div class="parents-grid">
+        <div class="parent-item">
+          <div class="parent-side">Parents of the Bride</div>
+          <div class="parent-names">Edgar Sarmiento<br>Evangeline Sarmiento</div>
+        </div>
+        <div class="parent-item">
+          <div class="parent-side">Parents of the Groom</div>
+          <div class="parent-names">Fernando Canonoy<br>Susan Canonoy</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BEST MAN & MOH ── -->
+    <div class="ent-block reveal">
+      <div class="ent-block-title">Best Man & Maid of Honor</div>
+      <div class="honor-grid">
+        <div class="honor-card">
+          <span class="honor-role">Maid of Honor</span>
+          <div class="honor-name">Ehd Krisna Sarmiento</div>
+        </div>
+        <div class="honor-card">
+          <span class="honor-role">Best Man</span>
+          <div class="honor-name">Adrian Paul Canonoy</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BRIDESMAIDS & GROOMSMEN (V2 style) ── -->
+    <div class="ent-block reveal">
+      <div class="ent-block-title">Bridesmaids & Groomsmen</div>
+      <div class="bm-table">
+        <div class="bm-thead">
+          <div class="bm-th">Bridesmaid</div>
+          <div class="bm-th">Groomsman</div>
+        </div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">01</span>Ena Marie Sarmiento-Gianan</div><div class="bm-cell"><span class="bm-num">01</span>Rheynard Sajona</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">02</span>Jelian Tablo</div><div class="bm-cell"><span class="bm-num">02</span>Jan Picardo</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">03</span>Kristine Joy Tapel</div><div class="bm-cell"><span class="bm-num">03</span>Paul Ceazar Muyo</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">04</span>Amie Jean delos Santos</div><div class="bm-cell"><span class="bm-num">04</span>Felix Endaya Jr.</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">05</span>Pamela Amor Cervantes</div><div class="bm-cell"><span class="bm-num">05</span>Arnold Enrique</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">06</span>Anna Rose Jainto</div><div class="bm-cell"><span class="bm-num">06</span>Jokid Talactac</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">07</span>Angelica Charisse Zafe</div><div class="bm-cell"><span class="bm-num">07</span>Glenn Angelo Gianan</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">08</span>Lyka Valeza</div><div class="bm-cell"><span class="bm-num">08</span>Mico Joross Tantiado</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">09</span>Joyce Anne Suarez</div><div class="bm-cell"><span class="bm-num">09</span>Manlourd Lumbao</div></div>
+        <div class="bm-row"><div class="bm-cell"><span class="bm-num">10</span>Sofia Pascual</div><div class="bm-cell"><span class="bm-num">10</span>Aniceto Tan Jr.</div></div>
+      </div>
+    </div>
+
+    <div class="gold-divider reveal"><span>✦</span></div>
+
+    <!-- ── BEARERS ── -->
+    <div class="ent-block reveal">
+      <div class="ent-block-title">Bearers</div>
+      <div class="bearers-grid">
+        <div class="bearer-card">
+          <span class="bearer-role">Ring Bearer</span>
+          <div class="bearer-name">Precious Erika Sarmiento</div>
+        </div>
+        <div class="bearer-card">
+          <span class="bearer-role">Bible Bearer</span>
+          <div class="bearer-name">Paulo Gonzales</div>
+        </div>
+        <div class="bearer-card">
+          <span class="bearer-role">Coin Bearer</span>
+          <div class="bearer-name">Jay Karlo Triumfante</div>
+        </div>
+        <div class="bearer-card">
+          <span class="bearer-role">Flower Girl</span>
+          <div class="bearer-name">Krystelle Faith Rodriguez</div>
+        </div>
+        <div class="bearer-card">
+          <span class="bearer-role">Flower Girl</span>
+          <div class="bearer-name">Jeiayan Ayel Molto</div>
+        </div>
+        <div class="bearer-card">
+          <span class="bearer-role">Flower Boy</span>
+          <div class="bearer-name">Robert Joshua Valeza</div>
+        </div>
+        <div class="bearer-card">
+          <span class="bearer-role">Flower Boy</span>
+          <div class="bearer-name">Vince Andrew Villareal</div>
+        </div>
+        <div class="bearer-card">
+          <span class="bearer-role">Here Comes the Bride</span>
+          <div class="bearer-name">Zhienzai Canonoy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-divider reveal"><span>✦</span></div>
+
+    <!-- ── PRINCIPAL SPONSORS (V2 style) ── -->
+    <div class="ent-block reveal">
+      <div class="ent-block-title">Principal Sponsors</div>
+      <div class="sponsor-list">
+        <div class="sp-row"><span class="sp-num">01</span><span class="sp-name">Conrado Del Rosario Jr.</span><span class="sp-name">Emma Canonoy-Del Rosario</span></div>
+        <div class="sp-row"><span class="sp-num">02</span><span class="sp-name">Felix Endaya Sr.</span><span class="sp-name">Marites Canonoy-Endaya</span></div>
+        <div class="sp-row"><span class="sp-num">03</span><span class="sp-name">Jun Manlangit</span><span class="sp-name">Alma Manlangit</span></div>
+        <div class="sp-row"><span class="sp-num">04</span><span class="sp-name">Ely Templonuevo</span><span class="sp-name">Maria Templonuevo</span></div>
+        <div class="sp-row"><span class="sp-num">05</span><span class="sp-name">Fidel Vegim</span><span class="sp-name">Rosario Vegim</span></div>
+        <div class="sp-row"><span class="sp-num">06</span><span class="sp-name">Jun Rodriguez</span><span class="sp-name">Jean Triumfante</span></div>
+        <div class="sp-row"><span class="sp-num">07</span><span class="sp-name">Jose Vargas</span><span class="sp-name">Cristy Comendador</span></div>
+        <div class="sp-row"><span class="sp-num">08</span><span class="sp-name">Noel Sarmiento</span><span class="sp-name">Editha Lumbao</span></div>
+      </div>
+    </div>
+
+    <!-- ── SECONDARY SPONSORS ── -->
+    <div class="ent-block reveal">
+      <div class="ent-block-title">Secondary Sponsors</div>
+      <div class="sec-sponsors-grid">
+        <div class="sec-sp-card">
+          <span class="sec-sp-role">Candle</span>
+          <div class="sec-sp-names">Juan Paolo Canonoy<br>Rochelle Canonoy</div>
+        </div>
+        <div class="sec-sp-card">
+          <span class="sec-sp-role">Veil</span>
+          <div class="sec-sp-names">Timothy Aller<br>Claire Cornel Vargas</div>
+        </div>
+        <div class="sec-sp-card">
+          <span class="sec-sp-role">Cord</span>
+          <div class="sec-sp-names">Gerome Del Pilar<br>Hazzle Maet Sangalang</div>
+        </div>
+        <div class="sec-sp-card">
+          <span class="sec-sp-role">Ribbon</span>
+          <div class="sec-sp-names">Melogay Alberto<br>Carla Mae Lero</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-divider reveal"><span>✦</span></div>
+
+    <!-- ── OFFICIANTS ── -->
+    <div class="ent-block reveal">
+      <div class="ent-block-title">Officiating Priests</div>
+      <div class="priest-strip">
+        <div class="priest-card">
+          <span class="priest-role">Celebrant</span>
+          <div class="priest-name">Fr. Stephen</div>
+        </div>
+        <div class="priest-card">
+          <span class="priest-role">Assisting Priest</span>
+          <div class="priest-name">Fr. Joms</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end entourage-wrap -->
+
+  <div class="page-nav-bar">
+    <a href="index.html">← Back to Home</a>
+    <a href="index.html#rsvp">RSVP Now →</a>
+  </div>
+
+  <footer>
+    <p>With love and gratitude,</p>
+    <p class="foot-script">Marco Polo &amp; Elyannah</p>
+    <p style="margin-top:1.5rem; font-size:.75rem; color:#888; letter-spacing:2px;">MAY 11, 2026 · VIRAC, CATANDUANES</p>
+  </footer>
+
+  <script>
+    const dot  = document.querySelector('.cur-dot');
+    const glow = document.querySelector('.cur-glow');
+    document.addEventListener('mousemove', e => {
+      dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px';
+      setTimeout(()=>{ glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, 55);
+    });
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
