@@ -110,9 +110,17 @@ footer .foot-script { font-family: var(--sign); font-size:2rem; color:var(--gold
 .btn-light:hover { background:#fff; color:var(--text); }
 
 /* ── MOBILE ── */
-@media (max-width:768px) {
-  nav { padding:1.2rem 1.5rem; }
-  .nav-links { gap:1.2rem; }
-  .nav-links a { font-size:.65rem; }
-  .sec { padding:5rem 5%; }
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-logo { font-size: 1rem; letter-spacing: 2px; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: .62rem; letter-spacing: 1.5px; }
+  .sec { padding: 5rem 5%; }
+}
+ 
+@media (max-width: 480px) {
+  nav { padding: .75rem 1.2rem; }
+  .nav-logo { font-size: .9rem; letter-spacing: 1.5px; }
+  .nav-links { gap: .7rem; }
+  .nav-links a { font-size: .55rem; letter-spacing: 1px; }
 }
