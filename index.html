@@ -30,7 +30,7 @@
     }
     h1.names .amp {
       font-style:italic; color: var(--gold);
-      display:inline; margin-left:-.05em;
+      display:block; margin-left:-.05em;
     }
     .hero-date {
       margin-top: 2rem;
@@ -66,9 +66,12 @@
     .seal-monogram {
       font-family: var(--serif);
       font-size:1.1rem; letter-spacing:2px;
-      background: var(--bg); padding:.3rem .5rem;
-      border-radius: 50%; border:1px solid var(--gold);
-      color: var(--gold); white-space:nowrap;
+      background: var(--bg);
+      width: 84px; height: 84px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
     }
 
     /* ══ MESSAGE ══ */
@@ -352,7 +355,7 @@
         <div class="faq-a">
           <p>You’re welcome to sit anywhere during the ceremony and enjoy the moment with us. At the reception, assigned seating will be arranged, with a place thoughtfully prepared just for you.</p>
         </div>
-    
+      </section>      
 
   <!-- RSVP  -->
   <section class="rsvp-sec sec" id="rsvp">
