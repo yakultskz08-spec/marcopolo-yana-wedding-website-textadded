@@ -522,7 +522,7 @@
 
   <div class="page-nav-bar">
     <a href="gallery.html">← Gallery</a>
-    <a href="index.html#rsvp">RSVP Now →</a>
+    <a href="entourage.html">Entourage →</a>
   </div>
 
   <footer>
@@ -547,7 +547,7 @@
     const dot  = document.querySelector('.cur-dot');
     const glow = document.querySelector('.cur-glow');
     document.addEventListener('mousemove', e => {
-      dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+      dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px';
       setTimeout(() => { glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, 55);
     });
 
@@ -557,18 +557,17 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-
+    /* ── Sticky nav active state ── */
     const stageEls   = document.querySelectorAll('.stage');
     const navAnchors = document.querySelectorAll('.pn-item');
     const stageObs   = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
+        if(e.isIntersecting) {
           navAnchors.forEach(n => n.classList.remove('active'));
           const match = document.querySelector(`.pn-item[href="#${e.target.id}"]`);
-          if (match) {
+          if(match) {
             match.classList.add('active');
-
-            match.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            match.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
           }
         }
       });
@@ -584,12 +583,21 @@
       const prevBtn  = car.querySelector('.prev');
       const nextBtn  = car.querySelector('.next');
       const total    = slides.length;
-      let cur = 0;
+      let page = 0;
 
       function vis() {
         return window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
       }
-      function maxCur() { return Math.max(0, total - vis()); }
+      function totalPages() { return Math.ceil(total / vis()); }
+
+      /* The starting slide index for a given page — last page shows
+        the final vis() slides so nothing gets cut off */
+      function slideForPage(p) {
+        const v = vis();
+        const tp = totalPages();
+        if(p >= tp - 1) return Math.max(0, total - v);
+        return p * v;
+      }
 
       function setWidths() {
         slides.forEach(s => s.style.width = `${100 / vis()}%`);
@@ -597,38 +605,44 @@
 
       function buildDots() {
         dotsWrap.innerHTML = '';
-        const pages = Math.ceil(total / vis());
-        for (let i = 0; i < pages; i++) {
+        const tp = totalPages();
+        for(let i = 0; i < tp; i++) {
           const d = document.createElement('div');
           d.className = 's-dot';
-          d.addEventListener('click', () => go(i * vis()));
+          d.addEventListener('click', () => goPage(i));
           dotsWrap.appendChild(d);
         }
       }
 
       function render() {
-        cur = Math.min(cur, maxCur());
-        const v = vis();
-        track.style.transform = `translateX(-${cur * (100 / v)}%)`;
-        const page = Math.floor(cur / v);
+        const v  = vis();
+        const tp = totalPages();
+        page = Math.min(page, tp - 1);
+
+        const startSlide = slideForPage(page);
+        track.style.transform = `translateX(-${startSlide * (100 / v)}%)`;
+
         dotsWrap.querySelectorAll('.s-dot').forEach((d, i) => d.classList.toggle('on', i === page));
-        countEl.textContent = `${page + 1} / ${Math.ceil(total / v)}`;
-        prevBtn.disabled = cur === 0;
-        nextBtn.disabled = cur >= maxCur();
+        countEl.textContent = `${page + 1} / ${tp}`;
+        prevBtn.disabled = page === 0;
+        nextBtn.disabled = page >= tp - 1;
       }
 
-      function go(idx) { cur = Math.max(0, Math.min(idx, maxCur())); render(); }
+      function goPage(p) {
+        page = Math.max(0, Math.min(p, totalPages() - 1));
+        render();
+      }
 
-      prevBtn.addEventListener('click', () => go(cur - vis()));
-      nextBtn.addEventListener('click', () => go(cur + vis()));
+      prevBtn.addEventListener('click', () => goPage(page - 1));
+      nextBtn.addEventListener('click', () => goPage(page + 1));
 
       /* touch swipe */
       let touchX = 0;
-      track.addEventListener('touchstart', e => touchX = e.touches[0].clientX, { passive: true });
+      track.addEventListener('touchstart', e => touchX = e.touches[0].clientX, { passive:true });
       track.addEventListener('touchend', e => {
         const dx = e.changedTouches[0].clientX - touchX;
-        if (Math.abs(dx) > 40) dx < 0 ? go(cur + vis()) : go(cur - vis());
-      }, { passive: true });
+        if(Math.abs(dx) > 40) dx < 0 ? goPage(page + 1) : goPage(page - 1);
+      }, { passive:true });
 
       setWidths(); buildDots(); render();
       window.addEventListener('resize', () => { setWidths(); buildDots(); render(); });
