@@ -130,23 +130,17 @@
     .qa-answer.his p::before { color: var(--gold); }
     .qa-answer.hers p::before { color: var(--sage); }
 
-   
+    /* ── BOTTOM NAV ── */
     .page-nav-bar {
       background: var(--bg-alt); padding: 2rem 7%;
       display: flex; justify-content: space-between; align-items: center;
       border-top: 1px solid #e8e2d0;
     }
     .page-nav-bar a {
-      font-size: .8rem; text-transform: uppercase; letter-spacing: 2px;
+      font-family: var(--serif); font-size: .8rem; text-transform: uppercase; letter-spacing: 2px;
       text-decoration: none; color: var(--text-mid); transition: color .2s;
     }
     .page-nav-bar a:hover { color: var(--gold); }
-
-    footer {
-      text-align: center;
-      padding: 4rem 2rem;
-      background: var(--bg);
-    }
 
     /* ── MOBILE ── */
     @media (max-width: 900px) {
@@ -344,12 +338,12 @@
 
   <footer>
     <p>With love and gratitude,</p>
-    <p class="foot-script" style="font-family: var(--script); font-size: 1.5rem; margin-top: 0.5rem; color: var(--text);">Marco &amp; Yana</p>
+    <p class="foot-script">Marco Polo &amp; Elyannah</p>
     <p style="margin-top:1.5rem; font-size:.75rem; color:#888; letter-spacing:2px;">MAY 11, 2026 · VIRAC, CATANDUANES</p>
   </footer>
 
   <script>
-
+    // Cursor
     const dot  = document.querySelector('.cur-dot');
     const glow = document.querySelector('.cur-glow');
     document.addEventListener('mousemove', e => {
@@ -358,7 +352,7 @@
       setTimeout(()=>{ glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, 55);
     });
 
-
+    // Reveal on scroll
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
     }, { threshold: 0.08 });
