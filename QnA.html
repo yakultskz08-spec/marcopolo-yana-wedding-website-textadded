@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Just Between Us | Marco & Yana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+
+    .page-hero {
+      height: 55vh; min-height: 380px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+      background: var(--bg-alt);
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/BLD03254.jpg') center 40% / cover no-repeat;
+      filter: brightness(.40) saturate(.75);
+      transform: scale(1.06);
+    }
+    .page-hero-content { position: relative; z-index: 2; color: #FDFCF6; }
+    .page-hero-content .label  { color: rgba(255,255,255,.6); }
+    .page-hero-content .heading { color: #FDFCF6; font-family: var(--serif); font-size: clamp(3rem,6vw,5rem); margin: 0.5rem 0; }
+    .page-hero-content .sub {
+      margin-top: 1rem; font-size: .85rem; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,.5);
+    }
+
+  
+    .qa-wrap {
+      padding: 6rem 6% 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+
+    .qa-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-alt);
+      margin-bottom: 6rem;
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.02);
+    }
+
+    
+    .qa-block.flip { direction: rtl; }
+    .qa-block.flip > * { direction: ltr; }
+
+  
+    .qa-img-panel {
+      position: relative; 
+      overflow: hidden;
+      aspect-ratio: 4 / 5; 
+    }
+    .qa-img-panel img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .7s ease;
+    }
+    .qa-img-panel:hover img { transform: scale(1.04); }
+
+
+    .qa-content {
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+  
+    .qa-q-num {
+      font-family: var(--serif);
+      font-size: .75rem; 
+      letter-spacing: 3px;
+      text-transform: uppercase; 
+      color: var(--sage); 
+      display: block; 
+      margin-bottom: 1rem;
+    }
+    .qa-question {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+
+    .qa-answers-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .qa-answer {
+      position: relative;
+    }
+    
+  
+    .qa-answer-label {
+      font-family: var(--serif);
+      font-size: .65rem; letter-spacing: 2px; text-transform: uppercase;
+      color: #fff;
+      padding: .4rem 1rem;
+      display: inline-block;
+      margin-bottom: .8rem;
+    }
+    .qa-answer.his .qa-answer-label { background: var(--gold); }
+    .qa-answer.hers .qa-answer-label { background: var(--sage); }
+
+    .qa-answer p {
+      font-size: 1.05rem; line-height: 1.8;
+      color: var(--text-mid);
+      margin: 0;
+    }
+    .qa-answer p::before {
+      content: '\201C';
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      opacity: 0.5;
+      line-height: 0; vertical-align: -0.3em;
+      margin-right: .3rem;
+    }
+    .qa-answer.his p::before { color: var(--gold); }
+    .qa-answer.hers p::before { color: var(--sage); }
+
+   
+    .page-nav-bar {
+      background: var(--bg-alt); padding: 2rem 7%;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid #e8e2d0;
+    }
+    .page-nav-bar a {
+      font-size: .8rem; text-transform: uppercase; letter-spacing: 2px;
+      text-decoration: none; color: var(--text-mid); transition: color .2s;
+    }
+    .page-nav-bar a:hover { color: var(--gold); }
+
+    footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--bg);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .qa-block, .qa-block.flip {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+      .qa-img-panel { aspect-ratio: 16 / 10; } 
+      .qa-content { padding: 3rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="cur-dot"></div>
+  <div class="cur-glow"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">M & Y</a>
+    <ul class="nav-links">
+      <li><a href="story.html">Story</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="entourage.html">Entourage</a></li>
+      <li><a href="qa.html" class="active">Q & A</a></li>
+      <li><a href="index.html#rsvp">RSVP</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-content">
+      <span class="label">heading</span>
+      <h1 class="heading">TITLE</h1>
+      <p class="sub">subtitle</p>
+    </div>
+  </div>
+
+  <div class="qa-wrap">
+
+    <div class="qa-block reveal">
+      <div class="qa-img-panel">
+        <img src="images/BLD03128.jpg" alt="Marco and Yana">
+      </div>
+      <div class="qa-content">
+        <span class="qa-q-num">Question 01</span>
+        <div class="qa-question">When did you first realize this was going to last forever?</div>
+        
+        <div class="qa-answers-wrapper">
+          <div class="qa-answer his">
+            <span class="qa-answer-label">His</span>
+            <p>Noong nag Dubai ako for better career opportunities pero in the end, umuwi din ako ng Pilipinas for her.</p>
+          </div>
+          <div class="qa-answer hers">
+            <span class="qa-answer-label">Hers</span>
+            <p>I can't specify the exact moment, but I realized this would last when I saw how he made an effort to get close to my loved ones, and when he chose to join me in SFC.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-block flip reveal">
+      <div class="qa-img-panel">
+        <img src="images/BLD03381.jpg" alt="Marco and Yana">
+      </div>
+      <div class="qa-content">
+        <span class="qa-q-num">Question 02</span>
+        <div class="qa-question">Most adorable habit of your partner.</div>
+        
+        <div class="qa-answers-wrapper">
+          <div class="qa-answer his">
+            <span class="qa-answer-label">His</span>
+            <p>Kapag naiinis siya, at iniinis ko pa lalo haha</p>
+          </div>
+          <div class="qa-answer hers">
+            <span class="qa-answer-label">Hers</span>
+            <p>His random singing anytime and anywhere. Though it annoys me too most of the time kasi napakaingay nya. HAHA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-block reveal">
+      <div class="qa-img-panel">
+        <img src="images/BLD03307.jpg" alt="Marco and Yana" style="object-position: center 30%;">
+      </div>
+      <div class="qa-content">
+        <span class="qa-q-num">Question 03</span>
+        <div class="qa-question">Funny memory you have with your partner.</div>
+        
+        <div class="qa-answers-wrapper">
+          <div class="qa-answer his">
+            <span class="qa-answer-label">His</span>
+            <p>Nung pag uwi ko galing Dubai walang wala ako, and every time ihahatid ko siya sa apartment, pag sumasakay kami ng jeep, lagi ko siyang tinatanong kung may barya ba siya, ang hindi niya alam, kahit papel na pera wala rin ako.</p>
+          </div>
+          <div class="qa-answer hers">
+            <span class="qa-answer-label">Hers</span>
+            <p>One time nung nanliligaw pa lang siya, may pinabaon siyang food treats with notes in Bicol words. Pero super lalim... Ginoogle translate nya pala hahahaha</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-block flip reveal">
+      <div class="qa-img-panel">
+        <img src="images/BLD03039.jpg" alt="Marco and Yana">
+      </div>
+      <div class="qa-content">
+        <span class="qa-q-num">Question 04</span>
+        <div class="qa-question">One quality you admire — and wish you had too.</div>
+        
+        <div class="qa-answers-wrapper">
+          <div class="qa-answer his">
+            <span class="qa-answer-label">His</span>
+            <p>Super family-oriented to the point na pati mga friends niya ay tinitreat niya as family.</p>
+          </div>
+          <div class="qa-answer hers">
+            <span class="qa-answer-label">Hers</span>
+            <p>His patieeeence. As in. And him being uneffortlessly funny.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-block reveal">
+      <div class="qa-img-panel">
+        <img src="images/BLD03183.jpg" alt="Marco and Yana" style="object-position: center 20%;">
+      </div>
+      <div class="qa-content">
+        <span class="qa-q-num">Question 05</span>
+        <div class="qa-question">What's one memorable moment together?</div>
+        
+        <div class="qa-answers-wrapper">
+          <div class="qa-answer his">
+            <span class="qa-answer-label">His</span>
+            <p>Our 1st anniversary, sa apartment lang nila. Nagluto ako ng favorite namin na Spam rice and carbonara, tapos nag exchange kami ng gifts and letters. 😊</p>
+          </div>
+          <div class="qa-answer hers">
+            <span class="qa-answer-label">Hers</span>
+            <p>Attending our first Liveloud concert together. Hindi pa siya SFC that time, so I really appreciated him joining kahit wala pa siyang idea sa mangyayari.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-block flip reveal">
+      <div class="qa-img-panel">
+        <img src="images/BLD03255.jpg" alt="Marco and Yana">
+      </div>
+      <div class="qa-content">
+        <span class="qa-q-num">Question 06</span>
+        <div class="qa-question">Most ridiculous thing you've argued about.</div>
+        
+        <div class="qa-answers-wrapper">
+          <div class="qa-answer his">
+            <span class="qa-answer-label">His</span>
+            <p>Anong kakainin?</p>
+          </div>
+          <div class="qa-answer hers">
+            <span class="qa-answer-label">Hers</span>
+            <p>Anong papanuorin? Haha</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-block reveal">
+      <div class="qa-img-panel">
+        <img src="images/BLD03031.jpg" alt="Marco and Yana">
+      </div>
+      <div class="qa-content">
+        <span class="qa-q-num">Question 07</span>
+        <div class="qa-question">What are you most excited about in life together?</div>
+        
+        <div class="qa-answers-wrapper">
+          <div class="qa-answer his">
+            <span class="qa-answer-label">His</span>
+            <p>Building something that's ours — our first home na may high-ceiling living room and a small garden outside na pagtatambayan namin, our first car, our first little Yana and Polo.</p>
+          </div>
+          <div class="qa-answer hers">
+            <span class="qa-answer-label">Hers</span>
+            <p>Sharing everything with him — especially being spoiled by his cooking every dayyy. And syempre travelling together, na kami lang. HAHA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-nav-bar">
+    <a href="entourage.html">← Entourage</a>
+    <a href="index.html#rsvp">RSVP Now →</a>
+  </div>
+
+  <footer>
+    <p>With love and gratitude,</p>
+    <p class="foot-script" style="font-family: var(--script); font-size: 1.5rem; margin-top: 0.5rem; color: var(--text);">Marco &amp; Yana</p>
+    <p style="margin-top:1.5rem; font-size:.75rem; color:#888; letter-spacing:2px;">MAY 11, 2026 · VIRAC, CATANDUANES</p>
+  </footer>
+
+  <script>
+
+    const dot  = document.querySelector('.cur-dot');
+    const glow = document.querySelector('.cur-glow');
+    document.addEventListener('mousemove', e => {
+      dot.style.left  = e.clientX + 'px';
+      dot.style.top   = e.clientY + 'px';
+      setTimeout(()=>{ glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, 55);
+    });
+
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
