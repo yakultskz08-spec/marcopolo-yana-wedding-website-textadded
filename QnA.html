@@ -166,7 +166,7 @@
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="journey.html">Journey</a></li>
       <li><a href="entourage.html">Entourage</a></li>
-      <li><a href="qa.html" class="active">Q & A</a></li>
+      <li><a href="QnA.html" class="active">His&Hers</a></li>
       <li><a href="index.html#rsvp">RSVP</a></li>
     </ul>
   </nav>
@@ -357,6 +357,23 @@
       entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    document.addEventListener("DOMContentLoaded", () => {
+      const navContainer = document.querySelector('.nav-links');
+      
+  
+      if (navContainer && window.innerWidth <= 768) {
+
+        setTimeout(() => {
+
+          const maxScroll = navContainer.scrollWidth - navContainer.clientWidth;
+          
+          navContainer.scrollTo({
+            left: maxScroll,
+            behavior: 'smooth'
+          });
+        }, 600);
+      }
+    });
   </script>
 </body>
 </html>
