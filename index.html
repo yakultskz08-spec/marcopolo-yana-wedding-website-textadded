@@ -248,7 +248,7 @@
     </ul>
   </nav>
 
-  <section class="hero" id="home">
+ <section class="hero" id="home">
     <div class="hero-text">
       <span class="wedding-of">The wedding of</span>
       <h1 class="names">
@@ -260,8 +260,6 @@
         May 11, 2026<br>Virac, Catanduanes
       </div>
     </div>
-
-
 
     <div class="hero-img-wrap parallax-img">
       <img src="images/0d72737c-f453-404e-b99c-975beeeeb14b (1).jpg" alt="Marco Polo and Elyannah">
@@ -280,7 +278,6 @@
     </div>
   </section>
 
-  <!-- MESSAGE -->
   <section class="message-sec sec reveal" id="story">
     <div class="message-grid">
       <div class="message-img-wrap reveal">
@@ -301,7 +298,6 @@
     </div>
   </section>
 
-  <!-- DETAILS  -->
   <section class="details-sec" id="details">
     <div class="details-head">
       <span class="label">Save the Date</span>
@@ -329,7 +325,6 @@
     </div>
   </section>
 
-  <!-- COUNTDOWN  -->
   <div class="countdown-sec">
     <div class="count-label">Counting down to forever</div>
     <div class="timer" id="timer">
@@ -340,7 +335,6 @@
     </div>
   </div>
 
-  <!-- FAQ  -->
   <section class="faq-sec sec" id="faq">
     <div style="text-align:center; margin-bottom:3.5rem;" class="reveal">
       <span class="label">Got questions?</span>
@@ -378,9 +372,10 @@
         <div class="faq-a">
           <p>You’re welcome to sit anywhere during the ceremony and enjoy the moment with us. At the reception, assigned seating will be arranged, with a place thoughtfully prepared just for you.</p>
         </div>
-      </section>      
+      </div>
+    </div>
+  </section>      
 
-  <!-- RSVP  -->
   <section class="rsvp-sec sec" id="rsvp">
     <div class="rsvp-inner">
       <div class="reveal">
@@ -431,6 +426,8 @@
     document.querySelectorAll('.reveal').forEach(el => {
       if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('in');
     });
+
+
 
     // ── Countdown ──
     const target = new Date('May 11, 2026 13:00:00').getTime();
